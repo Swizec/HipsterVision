@@ -70,7 +70,7 @@ var post_callback = function (req, res) {
 	console.log(data);
 	res.writeHead(200);
 	res.end();
-    };
+    });
 }
 
 exports.listener = http.createServer(function (req, res) {
@@ -81,4 +81,6 @@ exports.listener = http.createServer(function (req, res) {
     }
 });
 
-exports.subscribe(46.03, 14.30, 5000);
+exports.listener.listen(8124, '127.0.0.1', function () {
+    exports.subscribe(46.03, 14.30, 5000);
+});
