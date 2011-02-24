@@ -20,6 +20,7 @@ exports.subscribe = function (latitude, longitude, radius) {
 
     var body = querystring.stringify({'client_id': CLIENT_ID,
 				     'client_secret': CLIENT_SECRET,
+				      'verify_token': 'token-of-verification',
 				     'object': 'geography',
 				     'aspect': 'media',
 				     'lat': latitude,
@@ -55,7 +56,9 @@ exports.subscribe = function (latitude, longitude, radius) {
 var get_callback = function (req, res) {
     var query = urllib.parse(req.url, true);
 
-    
+    res.writeHead(200);
+    res.write(query.query['hub.challenge']);
+    res.end();
 }
 
 var post_callback = function (req, res) {
