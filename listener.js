@@ -52,6 +52,30 @@ exports.subscribe = function (latitude, longitude, radius) {
     });
 };
 
+var get_callback = function (req, res) {
+    var query = urllib.parse(req.url, true);
 
+    
+}
+
+var post_callback = function (req, res) {
+    var data = '';
+    req.on('data', function (buff) {
+	data += buff;
+    });
+    req.on('end', function () {
+	console.log(data);
+	res.writeHead(200);
+	res.end();
+    };
+}
+
+exports.listener = http.createServer(function (req, res) {
+    if (req.method == 'GET') {
+	get_callback(req, res);
+    }else{
+	post_callback(req, res);
+    }
+});
 
 exports.subscribe(46.03, 14.30, 5000);
