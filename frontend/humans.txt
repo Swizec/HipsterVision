@@ -3,13 +3,14 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site: 
-  Twitter: 
-  Location: 
+  me: Swizec
+  Site: swizec.com
+  Twitter: @swizec
+  Location: Slovenia
 
 /* THANKS */
   Names (& URL): 
+http://html5boilerplate.com/
 
 /* SITE */
   Standards: HTML5, CSS3

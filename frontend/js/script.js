@@ -3,18 +3,9 @@
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+$(document).ready(function () {
+    
+});
 
 
 
