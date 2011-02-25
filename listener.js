@@ -2,7 +2,8 @@
 var https = require('https'),
 http = require('http'),
 querystring = require('querystring'),
-urllib = require('url');
+urllib = require('url'),
+redis = require('redis').createClient();
 
 CLIENT_ID = 'd1ca75d66977495db80ff240d54eb6d4';
 CLIENT_SECRET = '74adf5ff7a26481c810b5cf8cb7f1e8b';
@@ -69,6 +70,9 @@ var post_callback = function (req, res) {
     });
     req.on('end', function () {
 	console.log(data);
+
+	redis.publish(data, "instagram-updates");
+
 	res.writeHead(200);
 	res.end();
     });
