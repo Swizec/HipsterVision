@@ -1,5 +1,6 @@
 
 var https = require('https'),
+http = require('http'),
 querystring = require('querystring'),
 urllib = require('url');
 
@@ -26,7 +27,7 @@ exports.subscribe = function (latitude, longitude, radius) {
 				     'lat': latitude,
 				     'lng': longitude,
 				     'radius': radius,
-				      'callback_url': 'http://hipstervision.org/notify'});
+				      'callback_url': 'http://hipstervision.org/notify/'});
 
     var options = {
 	host: 'api.instagram.com',
