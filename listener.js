@@ -83,5 +83,15 @@ exports.listener = http.createServer(function (req, res) {
 });
 
 exports.listener.listen(8124, '127.0.0.1', function () {
-    exports.subscribe(46.03, 14.30, 5000);
+    var cities = [{'lat': 46.055556, 'lon': 14.508333}, // ljubljana
+		  {'lat': 37.7793, 'lon': -122.4192}, // san francisco
+//		  {'lat': , 'lon': },
+//		  {'lat': , 'lon': },
+//		  {'lat': , 'lon': },
+//		  {'lat': , 'lon': },
+//		  {'lat': , 'lon': },];
+		 ];
+    for (var i = 0; i < cities.length; i++) {
+	exports.subscribe(cities[i].lat, cities[i].lon, 5000);
+    }
 });
