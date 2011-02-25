@@ -10,7 +10,8 @@ $(document).ready(function () {
 	    long_poll();
 	});
     }
-	   
+
+    long_poll();
 });
 
 
