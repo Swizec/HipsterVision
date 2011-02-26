@@ -71,7 +71,7 @@ var post_callback = function (req, res) {
     req.on('end', function () {
 	console.log(data);
 
-	redis.publish(data, "instagram-updates");
+	redis.publish("instagram-updates", data);
 
 	res.writeHead(200);
 	res.end();
