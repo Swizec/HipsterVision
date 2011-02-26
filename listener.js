@@ -57,9 +57,13 @@ exports.subscribe = function (latitude, longitude, radius) {
 
 var publish_images = function (data) {
     var data = JSON.parse(data);
+    var time = data['time'];
 
     for (var i = 0; i < data.length; i++) {
-	var options = { href: 'https://api.instagram.com/v1/media/search?lat=37.7793&lng=-122.4192&client_id=d1ca75d66977495db80ff240d54eb6d4&distance=5000&max_timestamp=1298757314&min_timestamp=1298757270'};
+	var options = { 
+	    host: 'api.instagram.com',
+	    query: 'lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-50),
+	    path: '/v1/media/search' }
 
 	https.get(options, function (res) {
 	    var data = "";
