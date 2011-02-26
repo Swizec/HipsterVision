@@ -3,12 +3,6 @@ var http = require('http'),
 redis = require('redis').createClient(),
 EventEmitter = require('events').EventEmitter;
 
-var timeouter = new EventEmitter();
-
-setInterval(function () {
-    timeouter.emit("timeout-poll");
-}, 20000);
-
 var server = http.createServer(function (req, res) {
     var push_message = function (channel, message) {
 	res.writeHead(200);
@@ -17,10 +11,8 @@ var server = http.createServer(function (req, res) {
     }
 
     redis.on("message", push_message);
-    timeouter.on("timeout-poll", function () {
-	res.writeHead(200);
-	res.end();
-    })
+    setTimeout(function () { push_message('', '') },
+	       29000);
 });
 
 
