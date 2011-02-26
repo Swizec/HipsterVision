@@ -10,24 +10,24 @@ CLIENT_SECRET = '74adf5ff7a26481c810b5cf8cb7f1e8b';
 
 exports.subscribe = function (latitude, longitude, radius) {
     /*curl -F 'client_id=CLIENT-ID' \
-	-F 'client_secret=CLIENT-SECRET' \
-	-F 'object=geography' \
-	-F 'aspect=media' \
-	-F 'lat=35.657872' \
-	-F 'lng=139.70232' \
-	-F 'radius=1000' \
-	-F 'callback_url=http://YOUR-CALLBACK/URL' \
-        https://api.instagram.com/v1/subscriptions/
-     */
+      -F 'client_secret=CLIENT-SECRET' \
+      -F 'object=geography' \
+      -F 'aspect=media' \
+      -F 'lat=35.657872' \
+      -F 'lng=139.70232' \
+      -F 'radius=1000' \
+      -F 'callback_url=http://YOUR-CALLBACK/URL' \
+      https://api.instagram.com/v1/subscriptions/
+    */
 
     var body = querystring.stringify({'client_id': CLIENT_ID,
-				     'client_secret': CLIENT_SECRET,
+				      'client_secret': CLIENT_SECRET,
 				      'verify_token': 'token-of-verification',
-				     'object': 'geography',
-				     'aspect': 'media',
-				     'lat': latitude,
-				     'lng': longitude,
-				     'radius': radius,
+				      'object': 'geography',
+				      'aspect': 'media',
+				      'lat': latitude,
+				      'lng': longitude,
+				      'radius': radius,
 				      'callback_url': 'http://hipstervision.org/notify/'});
 
     var options = {
@@ -47,7 +47,7 @@ exports.subscribe = function (latitude, longitude, radius) {
 	});
     });
     req.write(body);
-				     
+    
     req.end();
 
     req.on('error', function(e) {
@@ -69,10 +69,11 @@ var publish_images = function (data) {
 		var image = images[images.length-i-1];
 		
 		redis.publish("instagram-updates", image['data']['images']['low_resolution']['url']);
-	    }
+	    });
 	}).on("error", function (e) {
 	    console.error(e);
 	});
+    }
 }
 
 var get_callback = function (req, res) {
@@ -109,11 +110,11 @@ exports.listener = http.createServer(function (req, res) {
 exports.listener.listen(8124, '127.0.0.1', function () {
     var cities = [{'lat': 46.055556, 'lon': 14.508333}, // ljubljana
 		  {'lat': 37.7793, 'lon': -122.4192}, // san francisco
-//		  {'lat': , 'lon': },
-//		  {'lat': , 'lon': },
-//		  {'lat': , 'lon': },
-//		  {'lat': , 'lon': },
-//		  {'lat': , 'lon': },];
+		  //		  {'lat': , 'lon': },
+		  //		  {'lat': , 'lon': },
+		  //		  {'lat': , 'lon': },
+		  //		  {'lat': , 'lon': },
+		  //		  {'lat': , 'lon': },];
 		 ];
     for (var i = 0; i < cities.length; i++) {
 	exports.subscribe(cities[i].lat, cities[i].lon, 5000);
