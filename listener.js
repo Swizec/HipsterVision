@@ -55,6 +55,26 @@ exports.subscribe = function (latitude, longitude, radius) {
     });
 };
 
+var publish_images = function (data) {
+    var data = JSON.parse(data);
+
+    for (var i = 0; i < data.length; i++) {
+	var options = { href: 'https://api.instagram.com/v1/media/search?lat=37.7793&lng=-122.4192&client_id=d1ca75d66977495db80ff240d54eb6d4&distance=5000&max_timestamp=1298757314&min_timestamp=1298757270'};
+
+	https.get(options, function (res) {
+	    var data = "";
+	    res.on("data", function (chunk) { data+= chunk });
+	    res.on("end", function () {
+		var images = JSON.parse(data);
+		var image = images[images.length-i-1];
+		
+		redis.publish("instagram-updates", image['data']['images']['low_resolution']['url']);
+	    }
+	}).on("error", function (e) {
+	    console.error(e);
+	});
+}
+
 var get_callback = function (req, res) {
     var query = urllib.parse(req.url, true);
 
@@ -71,7 +91,7 @@ var post_callback = function (req, res) {
     req.on('end', function () {
 	console.log(data);
 
-	redis.publish("instagram-updates", data);
+	publish_images(data);
 
 	res.writeHead(200);
 	res.end();
