@@ -15,12 +15,13 @@ var server = http.createServer(function (req, res) {
 	res.end();
     }
 
+    var timeout = function () {
+	push_message();
+	timeouter.removeListener("timeout-poll", timeout)
+    }
+
     redis.on("message", push_message);
-    timeouter.on("timeout-poll", function () {
-	res.writeHead(200);
-	res.write("timeout prevention");
-	res.end();
-    })
+    timeouter.on("timeout-poll", timeout)
 });
 
 
