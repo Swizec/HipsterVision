@@ -71,13 +71,11 @@ var publish_images = function (input_data) {
 		console.log("got images");
 		var images = JSON.parse(data)['data'];
 
-		console.log(images.length);
-		
 		var published = false;
 		for (var j = 0; j < images.length; j++) {
 		    var image = images[j];
 		
-		    console.log(image);
+		    console.log(image['created_time']+" "+time);
 
 		    if (Math.abs(image['created_time']-time) < 4) {
 			console.log("PUBLISHING");
