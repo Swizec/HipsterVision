@@ -65,6 +65,8 @@ var publish_images = function (input_data) {
 	    host: 'api.instagram.com',
 	    path: '/v1/media/search?lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-10) }
 
+	console.log('https://api.instagram.com/'+options.path);
+
 	https.get(options, function (res) {
 	    var data = "";
 	    res.on("data", function (chunk) { data+= chunk });
