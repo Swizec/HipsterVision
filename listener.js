@@ -97,7 +97,7 @@ var publish_images = function (input_data, recursion) {
 		if (!published && recursion < 5) {
 		    console.log(recur_data);
 		    setTimeout(function () {publish_images([recur_data], recursion+1)},
-			       10000);
+			       20000);
 		}
 	    });
 	}).on("error", function (e) {
@@ -122,7 +122,10 @@ var post_callback = function (req, res) {
     req.on('end', function () {
 	console.log(data);
 
-	publish_images(JSON.parse(data));
+	// the instagram search api laaaaags
+	setTimeout(function () {
+	    publish_images(JSON.parse(data))
+	}, 20000);
 
 	res.writeHead(200);
 	res.end();
