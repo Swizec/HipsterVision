@@ -57,9 +57,10 @@ exports.subscribe = function (latitude, longitude, radius) {
 
 var publish_images = function (input_data) {
     console.log(input_data);
-    var time = input_data['time'];
 
     for (var i = 0; i < input_data.length; i++) {
+	var time = input_data[i]['time'];
+
 	var options = { 
 	    host: 'api.instagram.com',
 	    path: '/v1/media/search?lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-10) }
@@ -77,7 +78,7 @@ var publish_images = function (input_data) {
 		
 		    console.log(image['created_time']+" "+time);
 
-		    if (Math.abs(image['created_time']-time) < 4) {
+		    if (Math.abs(image['created_time']-time) < 2) {
 			console.log("PUBLISHING");
 			console.log(image['images']['low_resolution']['url']);
 			redis.publish("instagram-updates", image['images']['low_resolution']['url']);
