@@ -55,25 +55,36 @@ exports.subscribe = function (latitude, longitude, radius) {
     });
 };
 
-var publish_images = function (data) {
-    var data = JSON.parse(data);
-    var time = data['time'];
+var publish_images = function (input_data) {
+    var time = input_data['time'];
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < input_data.length; i++) {
 	var options = { 
 	    host: 'api.instagram.com',
-	    path: '/v1/media/search?lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-50) }
+	    path: '/v1/media/search?lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-10) }
 
 	https.get(options, function (res) {
 	    var data = "";
 	    res.on("data", function (chunk) { data+= chunk });
 	    res.on("end", function () {
 		var images = JSON.parse(data);
-		var image = images.data[0];
-	
-		console.log(image);
-	
-		redis.publish("instagram-updates", image['images']['low_resolution']['url']);
+
+		var published = false;
+		for (var j = 0; j < images.length; j++) {
+		    var image = images[j];
+		
+		    if (image['created_time'] == time) {
+			redis.publish("instagram-updates", image['images']['low_resolution']['url']);
+
+			published = true;
+			break;
+		    }
+		}
+
+		if (!published) {
+		    setTimeout(function () {publish_images([input_data[j]])},
+			       10000);
+		}
 	    });
 	}).on("error", function (e) {
 	    console.error(e);
@@ -97,7 +108,7 @@ var post_callback = function (req, res) {
     req.on('end', function () {
 	console.log(data);
 
-	publish_images(data);
+	publish_images(JSON.parse(data));
 
 	res.writeHead(200);
 	res.end();
