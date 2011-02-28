@@ -72,6 +72,8 @@ var publish_images = function (input_data) {
 		console.log("got images");
 		var images = JSON.parse(data)['data'];
 
+		console.log(images.length);
+
 		var published = false;
 		for (var j = 0; j < images.length; j++) {
 		    var image = images[j];
