@@ -71,16 +71,15 @@ var publish_images = function (input_data) {
 		console.log("got images");
 		var images = JSON.parse(data);
 
-		console.log(images);
-
 		var published = false;
 		for (var j = 0; j < images.length; j++) {
 		    var image = images[j];
 		
 		    console.log(image);
 
-		    if (image['created_time'] == time) {
+		    if (Math.abs(image['created_time']-time) < 4) {
 			console.log("PUBLISHING");
+			console.log(image['images']['low_resolution']['url']);
 			redis.publish("instagram-updates", image['images']['low_resolution']['url']);
 
 			published = true;
