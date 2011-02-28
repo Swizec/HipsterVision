@@ -93,7 +93,7 @@ var publish_images = function (input_data) {
 		}
 
 		if (!published) {
-		    setTimeout(function () {publish_images([input_data[j]])},
+		    setTimeout(function () {publish_images([input_data[i]])},
 			       10000);
 		}
 	    });
