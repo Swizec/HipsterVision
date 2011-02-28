@@ -55,7 +55,8 @@ exports.subscribe = function (latitude, longitude, radius) {
     });
 };
 
-var publish_images = function (input_data) {
+var publish_images = function (input_data, recursion) {
+    var recursion = recursion || 0;
     console.log(input_data);
 
     for (var i = 0; i < input_data.length; i++) {
@@ -92,8 +93,9 @@ var publish_images = function (input_data) {
 		    }
 		}
 
-		if (!published) {
-		    setTimeout(function () {publish_images([input_data[i]])},
+		if (!published && recursion < 5) {
+		    console.log(input_data[i]);
+		    setTimeout(function () {publish_images([input_data[i]], recursion+1)},
 			       10000);
 		}
 	    });
