@@ -61,6 +61,7 @@ var publish_images = function (input_data, recursion) {
 
     for (var i = 0; i < input_data.length; i++) {
 	var time = input_data[i]['time'];
+	var recur_data = input_data[i];
 
 	var options = { 
 	    host: 'api.instagram.com',
@@ -94,8 +95,8 @@ var publish_images = function (input_data, recursion) {
 		}
 
 		if (!published && recursion < 5) {
-		    console.log(input_data[i]);
-		    setTimeout(function () {publish_images([input_data[i]], recursion+1)},
+		    console.log(recur_data);
+		    setTimeout(function () {publish_images([recur_data], recursion+1)},
 			       10000);
 		}
 	    });
