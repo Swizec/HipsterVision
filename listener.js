@@ -62,17 +62,18 @@ var publish_images = function (data) {
     for (var i = 0; i < data.length; i++) {
 	var options = { 
 	    host: 'api.instagram.com',
-	    query: 'lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-50),
-	    path: '/v1/media/search' }
+	    path: '/v1/media/search?lat=37.7793&lng=-122.4192&distance=5000&client_id='+CLIENT_ID+'&max_timestamp='+time+'&min_timestamp='+(time-50) }
 
 	https.get(options, function (res) {
 	    var data = "";
 	    res.on("data", function (chunk) { data+= chunk });
 	    res.on("end", function () {
 		var images = JSON.parse(data);
-		var image = images[images.length-i-1];
-		
-		redis.publish("instagram-updates", image['data']['images']['low_resolution']['url']);
+		var image = images.data[0];
+	
+		console.log(image);
+	
+		redis.publish("instagram-updates", image['images']['low_resolution']['url']);
 	    });
 	}).on("error", function (e) {
 	    console.error(e);
