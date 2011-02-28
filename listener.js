@@ -69,7 +69,7 @@ var publish_images = function (input_data) {
 	    res.on("data", function (chunk) { data+= chunk });
 	    res.on("end", function () {
 		console.log("got images");
-		var images = JSON.parse(data);
+		var images = JSON.parse(data)['data'];
 
 		console.log(images.length);
 		
