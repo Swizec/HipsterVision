@@ -125,7 +125,7 @@ var post_callback = function (req, res) {
 	// the instagram search api laaaaags
 	setTimeout(function () {
 	    publish_images(JSON.parse(data))
-	}, 20000);
+	}, 174000);
 
 	res.writeHead(200);
 	res.end();
