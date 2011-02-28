@@ -82,7 +82,7 @@ var publish_images = function (input_data) {
 		
 		    console.log(image['created_time']+" "+time);
 
-		    if (Math.abs(image['created_time']-time) < 2) {
+		    if (image['created_time'] == time) {
 			console.log("PUBLISHING");
 			console.log(image['images']['low_resolution']['url']);
 			redis.publish("instagram-updates", image['images']['low_resolution']['url']);
