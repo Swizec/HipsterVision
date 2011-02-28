@@ -56,6 +56,7 @@ exports.subscribe = function (latitude, longitude, radius) {
 };
 
 var publish_images = function (input_data) {
+    console.log(input_data);
     var time = input_data['time'];
 
     for (var i = 0; i < input_data.length; i++) {
@@ -67,13 +68,17 @@ var publish_images = function (input_data) {
 	    var data = "";
 	    res.on("data", function (chunk) { data+= chunk });
 	    res.on("end", function () {
+		console.log("got images");
 		var images = JSON.parse(data);
 
 		var published = false;
 		for (var j = 0; j < images.length; j++) {
 		    var image = images[j];
 		
+		    console.log(image);
+
 		    if (image['created_time'] == time) {
+			console.log("PUBLISHING");
 			redis.publish("instagram-updates", image['images']['low_resolution']['url']);
 
 			published = true;
