@@ -47,7 +47,10 @@ function find_pics(query) {
 			 if (status == 'OK') {
 			     $("#search input[type='text']").val(result[0].formatted_address);
 			     
-			     alert(result[0].geometry.location);
+			     $.get('/search/?search='+result[0].geometry.location,
+				   function (images) {
+				       alert(images);
+				   });
 			 }else{
 			     alert('Fuck! Something went wrong talking to google');
 			 }
