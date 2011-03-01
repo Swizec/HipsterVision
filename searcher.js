@@ -5,9 +5,7 @@ var http = require('http'),
 
 
 var server = http.createServer(function (req, res) {
-    var query = ''
-
-    var respond = function () {
+    var perform_search = function (query) {
 	res.writeHead(200);
 	res.write("You searched for: "+query+"\n");
 	res.end();
@@ -19,12 +17,12 @@ var server = http.createServer(function (req, res) {
 	    raw += chunk;
 	});
 	req.on('end', function () {
-	    query = querystring.parse(raw)['search'];
-	    respond()
+	    var query = querystring.parse(raw)['search'];
+	    perform_search(query)
 	});
     }else{
-	query = querystring.parse(urllib.parse(req.url)['query'])['search'];
-	respond();
+	var query = querystring.parse(urllib.parse(req.url)['query'])['search'];
+	perform_search(query);
     }
 });
 
