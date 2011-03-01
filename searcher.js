@@ -1,15 +1,23 @@
 
 var http = require('http'),
     querystring = require('querystring'),
-    urllib = require('url');
+    urllib = require('url'),
+    instagram = require('instagram').createClient('d1ca75d66977495db80ff240d54eb6d4',
+						  '74adf5ff7a26481c810b5cf8cb7f1e8b');
 
 
 var server = http.createServer(function (req, res) {
     var perform_search = function (query) {
 	var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
-	res.writeHead(200);
-	res.write("lat: "+geocode[0]+", lng: "+geocode[1]+"\n");
-	res.end();
+
+	instagram.media.search({lat: geocode[0],
+				lng: geocode[1],
+				distance: 5000},
+			       function (images, error) {
+				   res.writeHead(200);
+				   res.write(JSON.stringify(images));
+				   res.end();
+			       });
     }
 
     if (req.method == 'POST') {
