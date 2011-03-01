@@ -56,9 +56,10 @@ function find_pics(query) {
 function display_images(images) {
     var images = $.parseJSON(images);
     var $target = $("#display");
+    var $proto = $("#proto_image")
 
     for (var i = 0; i < images.length; i++) {
-	$target.append('<img src="'+images[i].images.low_resolution+'" />');
+	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url);
     }
 }
 
