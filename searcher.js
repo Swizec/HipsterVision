@@ -6,8 +6,9 @@ var http = require('http'),
 
 var server = http.createServer(function (req, res) {
     var perform_search = function (query) {
+	var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
 	res.writeHead(200);
-	res.write("You searched for: "+query+"\n");
+	res.write("lat: "+geocode[0]+", lng: "+geocode[1]+"\n");
 	res.end();
     }
 
