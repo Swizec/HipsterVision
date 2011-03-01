@@ -38,7 +38,6 @@ $(document).ready(function () {
     }
 });
 
-
 function find_pics(query) {
     var geocoder = new google.maps.Geocoder();
 
@@ -47,16 +46,21 @@ function find_pics(query) {
 			 if (status == 'OK') {
 			     $("#search input[type='text']").val(result[0].formatted_address);
 			     
-			     $.get('/search/?search='+result[0].geometry.location,
-				   function (images) {
-				       alert(images);
-				   });
+			     $.get('/search/?search='+result[0].geometry.location, display_images);
 			 }else{
 			     alert('Fuck! Something went wrong talking to google');
 			 }
 		     });
 }
 
+function display_images(images) {
+    var images = $.parseJSON(images);
+    var $target = $("#display");
+
+    for (var i = 0; i < images.length; i++) {
+	$target.append('<img src="'+images[i].images.low_resolution+'" />');
+    }
+}
 
 
 
