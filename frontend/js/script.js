@@ -56,10 +56,17 @@ function find_pics(query) {
 function display_images(images) {
     var images = $.parseJSON(images);
     var $target = $("#display");
-    var $proto = $("#proto-image")
+    var $proto = $("#proto-image");
+
+    var d = new Date();
+    d.setTime(images[0].created_time*1000);
+
+
 
     for (var i = 0; i < images.length; i++) {
-	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+((new Date()).setTime(images[i].created_time*1000).toUTCString())+'" class="timeago"></time>');
+	var d = new Date();
+	d.setTime(images[i].created_time*1000);
+	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(d.toUTCString())+'" class="timeago"></time>');
     }
 
     $('time.timeago').timeago();
