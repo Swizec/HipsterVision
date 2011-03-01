@@ -59,8 +59,10 @@ function display_images(images) {
     var $proto = $("#proto-image")
 
     for (var i = 0; i < images.length; i++) {
-	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url);
+	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+images[i].created_time+'" class="timeago"></time>');
     }
+
+    $('time.timeago').timeago();
 }
 
 
