@@ -43,6 +43,8 @@ $(document).ready(function () {
     }, function () {
 	$("#container").removeClass('flip');
     });
+
+    $('time').timeago();
 });
 
 function find_pics(query) {

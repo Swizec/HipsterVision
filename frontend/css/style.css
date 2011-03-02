@@ -280,6 +280,11 @@ form.small {
     -webkit-transform: rotateY(0deg);
 }
 
+#about {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
 
 
 /**
