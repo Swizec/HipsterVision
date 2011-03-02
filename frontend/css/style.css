@@ -198,7 +198,7 @@ form input[type=text] {
 
 form.small {
     width: 100%;
-font-size: 1.3em;
+    font-size: 1.3em;
 }
 
 .image {
@@ -207,6 +207,7 @@ font-size: 1.3em;
     position: relative;
     width: 306px;
     height: 306px;
+    overflow: hidden;
 }
 
 .image img {
@@ -224,10 +225,12 @@ font-size: 1.3em;
     width: 306px;
     max-width: 306px;
     bottom: -6em;
-    transition: bottom ease-in 500ms;
-    -webkit-transition: bottom ease-in 300ms;
-    -moz-transition: bottom ease-in 300ms;
-    -o-transition: bottom ease-in 300ms;
+    word-wrap: break-word;
+    text-align: justify;
+    transition: bottom ease-out 300ms;
+    -webkit-transition: bottom ease-out 300ms;
+    -moz-transition: bottom ease-out 300ms;
+    -o-transition: bottom ease-out 300ms;
 }
 
 .image:hover label {
