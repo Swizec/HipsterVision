@@ -61,12 +61,10 @@ function display_images(images) {
     var d = new Date();
     d.setTime(images[0].created_time*1000);
 
-
-
     for (var i = 0; i < images.length; i++) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(d.toUTCString())+'" class="timeago"></time>');
+	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(d.toUTCString())+'" class="timeago"></time>'+((images[i].caption != '') ? '<p>'+images[i].caption+'</p>' : ''));
     }
 
     $('time.timeago').timeago();

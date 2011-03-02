@@ -165,15 +165,33 @@ a:hover { color: #036; }
 /**
  * Primary styles
  *
- * Author: 
+ * Author: Swizec
  */
 
+.image {
+    display: block;
+    float: left;
+    position: relative;
+    width: 306px;
+    height: 306px;
+}
 
+.image img {
+    display: block;
+    position: absolute;
+    z-index: 0;
+}
 
-
-
-
-
+.image label {
+    display: block;
+    z-index: 1;
+    position: absolute;
+    padding: 1.5em;
+    background: black;
+    color: white;
+    width: 100%;
+    bottom: 0px;
+}
 
 
 
