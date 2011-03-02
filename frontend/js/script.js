@@ -76,6 +76,8 @@ function find_pics(query) {
     if (query != '!popular') {
 	var geocoder = new google.maps.Geocoder();
 
+	$("title").html("We're having new age fun with a vintage feel in "+query);
+
 	geocoder.geocode({address: query},
 			 function (result, status) {
 			     if (status == 'OK') {
