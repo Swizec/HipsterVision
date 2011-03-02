@@ -53,26 +53,38 @@ $(document).ready(function () {
     });
 
     $('time').timeago();
+
+    $('.popular').click(function (event) {
+	event.preventDefault();
+
+	window.location.href = "http://hipstervision.org/?search=!popular";
+    });
 });
 
 function find_pics(query) {
-    var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({address: query},
-		     function (result, status) {
-			 if (status == 'OK') {
-			     $("#search input[type='text']").val(result[0].formatted_address);
-	console.log(result[0].geometry.location+"");
+    var do_search = function (query) {
 	$.ajax({url: '/search/',
 		dataType: 'json',
 		data: {search: result[0].geometry.location+""},
 		success: function (data) { display_images(data); },
 		error: function (jqXHR, err) { error("Something fishy with the server :("); }});			     
+    }
 
-			 }else{
-			     error("Google won't talk to us :/");
-			 }
-		     });
+    if (query != '!popular') {
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({address: query},
+			 function (result, status) {
+			     if (status == 'OK') {
+				 $("#search input[type='text']").val(result[0].formatted_address);
+				 do_search(result[0].geometry.location+"");
+			     }else{
+				 error("Google won't talk to us :/");
+			     }
+			 });
+    }else{
+	do_search(query);
+    }
 }
 
 // random find on internets and fixd a bit

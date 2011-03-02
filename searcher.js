@@ -7,20 +7,26 @@ var http = require('http'),
 
 
 var server = http.createServer(function (req, res) {
-    var perform_search = function (query) {
-	var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
+    var respond = function (images, error) {
+	var body = JSON.stringify({images: images}); 
+	res.writeHead(200, {
+	    'Content-Type': 'application/json'
+	});
+	res.write(body);
+	res.end();
+    }
 
-	instagram.media.search({lat: geocode[0],
-				lng: geocode[1],
-				distance: 5000},
-			       function (images, error) {
-				   var body = JSON.stringify({images: images}); 
-				   res.writeHead(200, {
-				       'Content-Type': 'application/json'
-				   });
-				   res.write(body);
-				   res.end();
-			       });
+    var perform_search = function (query) {
+	if (query != '!popular') {
+	    var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
+
+	    instagram.media.search({lat: geocode[0],
+				    lng: geocode[1],
+				    distance: 5000},
+				  respond);
+	}else{
+	    instagram.media.popular(respond);
+	}
     }
 
     if (req.method == 'POST') {
