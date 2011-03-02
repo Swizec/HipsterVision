@@ -40,8 +40,10 @@ $(document).ready(function () {
 
     $(".about").toggle(function () {
 	$("#container").addClass('flip');
+	$(".image").css({display: "none"});
     }, function () {
 	$("#container").removeClass('flip');
+	$(".image").css({display: "inline-block"});
     });
 
     $(".image").live('click', function () {
