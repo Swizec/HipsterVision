@@ -379,7 +379,10 @@ form.small {
     display: absolute;
     top: 40px;
     left: 0px;
+    z-index: 1100;
     width: 100px;
+    height: 100px;
+    border: 1px solid red;
 }
 
 /**
