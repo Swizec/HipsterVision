@@ -44,6 +44,12 @@ $(document).ready(function () {
 	$("#container").removeClass('flip');
     });
 
+    $(".image").toggle(function () {
+	$(this).addClass('flip');
+    }, function () {
+	$(this).addClass('flip');
+    });
+
     $('time').timeago();
 });
 
