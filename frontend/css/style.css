@@ -191,6 +191,23 @@ a:hover { color: #036; }
     color: white;
     width: 100%;
     bottom: 0px;
+.image label {
+    display: block;
+    position: absolute;
+    padding: 1.5em;
+    background: rgba(0,0,0, 0.6);
+    color: white;
+    width: 306px;
+    max-width: 306px;
+    bottom: -6em;
+    transition: bottom ease-in 500ms;
+    -webkit-transition: bottom ease-in 300ms;
+    -moz-transition: bottom ease-in 300ms;
+    -o-transition: bottom ease-in 300ms;
+}
+
+.image:hover label {
+    bottom: 0em;
 }
 
 
