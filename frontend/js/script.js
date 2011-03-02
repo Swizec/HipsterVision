@@ -134,7 +134,8 @@ function display_images(images) {
     for (var i = 0; i < images.length; i++) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i).appendTo($target);
+	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i);
+	$image.appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
 	$image.siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
