@@ -387,11 +387,12 @@ form.small {
 }
 
 .freelance {
-    display: absolute;
-    top: 40px;
-    right: 10px;
+    position: absolute;
+    top: 140px;
+    left: 10px;
+    text-align: right;
     padding: 5px;
-    width: 150px;
+    width: 200px;
     height: 30px;
     margin-bottom: -30px;
 }
