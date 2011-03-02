@@ -68,7 +68,7 @@ function find_pics(query) {
     var do_search = function (query) {
 	$.ajax({url: '/search/',
 		dataType: 'json',
-		data: {search: result[0].geometry.location+""},
+		data: {search: query},
 		success: function (data) { display_images(data); },
 		error: function (jqXHR, err) { error("Something fishy with the server :("); }});			     
     }
