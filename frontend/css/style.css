@@ -237,7 +237,11 @@ form.small {
     bottom: 0em;
 }
 
-
+#error {
+    display: none;
+    font-size: 4em;
+    font-weight: 600;
+}
 
 
 

@@ -50,7 +50,7 @@ function find_pics(query) {
 			     $.getJSON('/search/?search='+result[0].geometry.location, 
 				       display_images);
 			 }else{
-			     alert('Fuck! Something went wrong talking to google');
+			     error("Google won't talk to us :/");
 			 }
 		     });
 }
@@ -110,14 +110,20 @@ function display_images(images) {
     var d = new Date();
     d.setTime(images[0].created_time*1000);
 
+    if (images.length < 1) {
+	error("No hipsters in "+$("#search input[type='text']").val()+" :'(");
+    }
+
     for (var i = 0; i < images.length; i++) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	$proto.clone().attr('class', 'image').appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
+	$proto.clone().attr('class', 'image').attr('id', 'image-'+i).appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
     }
 
     $('time').timeago();
 }
 
 
-
+function error(msg) {
+    $("#error").html(msg).css({display: 'block'});
+}
