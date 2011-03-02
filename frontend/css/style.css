@@ -169,7 +169,7 @@ a:hover { color: #036; }
  * Author: Swizec
  */
 
-@font-face { font-family: Hawaii; src: url('/css/Hawaii_Killer.ttf'); } 
+@font-face { font-family: Hawaii; src: url('css/Hawaii_Killer.ttf'); } 
 
 header {
     font-family: Hawaii;
@@ -274,7 +274,7 @@ form.small {
 
 
 .front {
-z-index: 2;
+    z-index: 900;
     -webkit-transform: rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -286,13 +286,13 @@ z-index: 2;
 }
 
 .flip .front {
-    z-index: 0;
+    z-index: 900;
 
     -webkit-transform: rotateY(180deg);
 }
 
 .back {
-z-index: 0;
+    z-index: 800;
     -webkit-transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -304,15 +304,25 @@ z-index: 0;
 }
 
 .flip .back {
-    z-index: 0;
+    z-index: 1000;
 			
     -webkit-transform: rotateY(0deg);
+}
+
+#main {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    background: white;
 }
 
 #about {
     position: absolute;
     top: 30px;
+    left: 0px;
+    background: white;
     width: 100%;
+    height: 100%;
 }
 
 #about article {
