@@ -107,9 +107,6 @@ function display_images(images) {
     var $target = $("#display");
     var $proto = $("#proto-image");
 
-    var d = new Date();
-    d.setTime(images[0].created_time*1000);
-
     if (images.length < 1) {
 	error("No hipsters in "+$("#search input[type='text']").val()+" :'(");
     }
