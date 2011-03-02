@@ -1,5 +1,4 @@
-var settings = require('./settings'),
-    spawn = require('child_process').spawn,
+var spawn = require('child_process').spawn,
     daemon = require('daemon'),
     fs = require('fs');
 

@@ -205,6 +205,12 @@ form.small .explain {
     display: none;
 }
 
+form p.explain {
+    font-size: 0.6em;
+    line-height: 1em;
+    margin-bottom: 0.5em;
+}
+
 .image {
     display: block;
     float: left;
