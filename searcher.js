@@ -44,4 +44,6 @@ var server = http.createServer(function (req, res) {
     }
 });
 
+var daemon = require('daemon');
+daemon.start();
 server.listen(8124, '127.0.0.1');
