@@ -44,4 +44,5 @@ var server = http.createServer(function (req, res) {
     }
 });
 
-server.listen(8124, '127.0.0.1');
+var port = process.argv[2];
+server.listen(port, '127.0.0.1');

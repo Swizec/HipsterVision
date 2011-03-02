@@ -5,13 +5,16 @@ var spawn = require('child_process').spawn,
 var start = function () {
     daemon.start();
 
-    var start_worker = function () {
-	var child = spawn('node', ['searcher.js'], {cwd: '/home/swizec/Documents/random-coding/HipsterVision'});
+    var start_worker = function (port) {
+	var child = spawn('node', ['searcher.js', port], {cwd: '/home/swizec/Documents/random-coding/HipsterVision'});
 	child.on("exit", function (code) {
-	    start_worker();
+	    start_worker(port);
 	});
     }
-    start_worker();
+
+    for (var port = 8124; port < 8130; port++) {
+	start_worker(port);
+    }
 }
 
 var status = function () {
