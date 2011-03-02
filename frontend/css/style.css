@@ -153,6 +153,7 @@ body, select, input, textarea {
   color: #444;
   /* Set your base font here, to apply evenly */
   /* font-family: Georgia, serif;  */
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 /* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
@@ -167,6 +168,12 @@ a:hover { color: #036; }
  *
  * Author: Swizec
  */
+
+@font-face { font-family: Hawaii; src: url('/css/Hawaii_Killer.ttf'); } 
+
+header {
+    font-family: Hawaii;
+}
 
 .image {
     display: block;
