@@ -261,8 +261,9 @@ form.small {
 .image .back ul {
     display: block;
     height: 280px;
-    width: 306px;
+    width: 280px;
     overflow: auto;
+    margin: 0px;
 }
 
 #error {
