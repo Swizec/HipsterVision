@@ -65,7 +65,6 @@ function find_pics(query) {
 		     function (result, status) {
 			 if (status == 'OK') {
 			     $("#search input[type='text']").val(result[0].formatted_address);
-	console.log(result[0].geometry.location+"");
 	$.ajax({url: '/search/',
 		dataType: 'json',
 		data: {search: result[0].geometry.location+""},
