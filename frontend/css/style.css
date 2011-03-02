@@ -286,6 +286,38 @@ form.small {
     width: 100%;
 }
 
+#about article {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 1.2em;
+    line-spacing: 0.3em;
+}
+
+#about article p {
+    margin-bottom: 0.6em;
+}
+
+#about article h2 {
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.about {
+    display: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0.5em;
+    background: #F55F14;
+    border-bottom-radius: 5px;
+    -webkit-border-bottom-radius: 5px;
+    -moz-border-bottom-radius: 5px;
+    -o-border-bottom-radius: 5px;
+    -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
+    -o-box-shadow: 10px 10px 5px #888;
+    box-shadow: 10px 10px 5px #888;
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
