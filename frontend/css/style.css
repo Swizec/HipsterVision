@@ -379,10 +379,21 @@ form.small {
     display: absolute;
     top: 40px;
     left: 10px;
+    padding-left: 10px;
     z-index: 1100;
     width: 100px;
     height: 150px;
     margin-bottom: -150px;
+}
+
+.freelance {
+    display: absolute;
+    top: 40px;
+    right: 10px;
+    padding: 5px;
+    width: 150px;
+    height: 30px;
+    margin-bottom: -30px;
 }
 
 /**
