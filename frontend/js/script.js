@@ -102,7 +102,7 @@ function isodatetime(today) {
 }
 
 function display_images(images) {
-    var images = $.parseJSON(images);
+    var images = JSON.parse(images);
     var $target = $("#display");
     var $proto = $("#proto-image");
 
