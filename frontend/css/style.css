@@ -184,15 +184,6 @@ a:hover { color: #036; }
 
 .image label {
     display: block;
-    z-index: 1;
-    position: absolute;
-    padding: 1.5em;
-    background: rgba(0,0,0, 0.6);
-    color: white;
-    width: 100%;
-    bottom: 0px;
-.image label {
-    display: block;
     position: absolute;
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
