@@ -253,6 +253,13 @@ form.small {
     bottom: 0px;
 }
 
+.image .back ul {
+    display: block;
+    height: 306px;
+    width: 306px;
+    overflow: auto;
+}
+
 #error {
     display: none;
     font-size: 4em;
