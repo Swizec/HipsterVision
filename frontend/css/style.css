@@ -201,6 +201,10 @@ form.small {
     font-size: 1.3em;
 }
 
+form.small .explain {
+    display: none;
+}
+
 .image {
     display: block;
     float: left;
