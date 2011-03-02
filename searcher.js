@@ -16,7 +16,6 @@ var server = http.createServer(function (req, res) {
 			       function (images, error) {
 				   var body = JSON.stringify({images: images}); 
 				   res.writeHead(200, {
-				       'Content-Length': body.length,
 				       'Content-Type': 'application/json'
 				   });
 				   res.write(body);

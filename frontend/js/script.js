@@ -52,9 +52,13 @@ function find_pics(query) {
 		     function (result, status) {
 			 if (status == 'OK') {
 			     $("#search input[type='text']").val(result[0].formatted_address);
-			     
-			     $.getJSON('/search/?search='+result[0].geometry.location, 
-				       display_images);
+	console.log(result[0].geometry.location+"");
+	$.ajax({url: '/search/',
+		dataType: 'json',
+		data: {search: result[0].geometry.location+""},
+		success: function (data) { display_images(data); },
+		error: function (jqXHR, err) { error("Something fishy with the server :("); }});			     
+
 			 }else{
 			     error("Google won't talk to us :/");
 			 }
