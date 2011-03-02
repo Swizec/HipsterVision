@@ -47,7 +47,8 @@ function find_pics(query) {
 			 if (status == 'OK') {
 			     $("#search input[type='text']").val(result[0].formatted_address);
 			     
-			     $.get('/search/?search='+result[0].geometry.location, display_images);
+			     $.getJSON('/search/?search='+result[0].geometry.location, 
+				       display_images);
 			 }else{
 			     alert('Fuck! Something went wrong talking to google');
 			 }
@@ -102,7 +103,7 @@ function isodatetime(today) {
 }
 
 function display_images(images) {
-    var images = $.parseJSON(images).images;
+    var images = images.images;
     var $target = $("#display");
     var $proto = $("#proto-image");
 

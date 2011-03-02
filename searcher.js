@@ -14,8 +14,12 @@ var server = http.createServer(function (req, res) {
 				lng: geocode[1],
 				distance: 5000},
 			       function (images, error) {
-				   res.writeHead(200);
-				   res.write(JSON.stringify({images: images}));
+				   var body = JSON.stringify({images: images}); 
+				   res.writeHead(200, {
+				       'Content-Length': body.length,
+				       'Content-Type': 'application/json'
+				   });
+				   res.write(body);
 				   res.end();
 			       });
     }
