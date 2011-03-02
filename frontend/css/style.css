@@ -219,9 +219,9 @@ form.small {
 }
 
 .image .front, .image .back {
-position: absolute;
-top: 0px;
-left: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 .image .front img {
@@ -233,9 +233,9 @@ left: 0px;
 .image .front label {
     display: block;
     position: absolute;
-z-index: 1;
-left: 0px;
-bottom: 0px;
+    z-index: 1;
+    left: 0px;
+    bottom: -6em;
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
     color: white;
@@ -243,14 +243,14 @@ bottom: 0px;
     max-width: 306px;
     word-wrap: break-word;
     text-align: justify;
-    /*transition: bottom ease-out 300ms;
-    -webkit-transition: opacity ease-out 300ms;
+    transition: bottom ease-out 300ms;
+    -webkit-transition: bottom ease-out 300ms;
     -moz-transition: bottom ease-out 300ms;
-    -o-transition: bottom ease-out 300ms;*/
+    -o-transition: bottom ease-out 300ms;
 }
 
 .image .front:hover label {
-/*opacity: 1.0;*/
+    bottom: 0px;
 }
 
 #error {
