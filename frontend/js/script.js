@@ -146,7 +146,7 @@ function display_images(images) {
 	error("No hipsters in "+$("#search input[type='text']").val()+" :'(");
     }
 
-    for (var i = 0; i < images.length; i++) {
+    var display_image = function (i) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
 	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i);
@@ -156,10 +156,14 @@ function display_images(images) {
 	$image.find('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
 	
 	var $comments = $image.find('.back ul');
-	for (var j = 0; j < images[i].comments.count; j++) {
+	for (var j = 0; j < images[i].comments.data.length; j++) {
 	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
 	}
+	
+	if (i < images.length) { setTimeout(function () {display_image(i+1)}, 50) };
     }
+
+    display_image(0);
 
     $('time').timeago();
 }
