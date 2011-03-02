@@ -243,10 +243,10 @@ form.small {
     max-width: 306px;
     word-wrap: break-word;
     text-align: justify;
-    transition: bottom,top ease-out 300ms;
-    -webkit-transition: bottom,top ease-out 300ms;
-    -moz-transition: bottom,top ease-out 300ms;
-    -o-transition: bottom,top ease-out 300ms;
+    transition: all ease-out 300ms;
+    -webkit-transition: all ease-out 300ms;
+    -moz-transition: all ease-out 300ms;
+    -o-transition: all ease-out 300ms;
 }
 
 .image .front label.caption {
@@ -254,8 +254,14 @@ form.small {
 }
 
 .image .front label.likes {
-    top: -1em;
+    top: -5em;
     color: red;
+    width: 50px;
+    padding: 5px;
+    margin-left:246px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-left-radius: 10px; 
 }
 
 .image .front label.likes .num {

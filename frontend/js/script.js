@@ -156,10 +156,7 @@ function display_images(images) {
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
-	$image.find('label.caption').html(
-	    '<strong>'+images[i].user.username+'</strong><time
-        datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : '')
-	);
+	$image.find('label.caption').html('<strong>'+images[i].user.username+'</strong><time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
 	
 	var $comments = $image.find('.back ul');
 	for (var j = 0; j < images[i].comments.data.length; j++) {
