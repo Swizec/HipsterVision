@@ -236,7 +236,6 @@ form.small {
     position: absolute;
     z-index: 1;
     left: 0px;
-    bottom: -6em;
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
     color: white;
@@ -244,14 +243,31 @@ form.small {
     max-width: 306px;
     word-wrap: break-word;
     text-align: justify;
-    transition: bottom ease-out 300ms;
-    -webkit-transition: bottom ease-out 300ms;
-    -moz-transition: bottom ease-out 300ms;
-    -o-transition: bottom ease-out 300ms;
+    transition: bottom,top ease-out 300ms;
+    -webkit-transition: bottom,top ease-out 300ms;
+    -moz-transition: bottom,top ease-out 300ms;
+    -o-transition: bottom,top ease-out 300ms;
 }
 
-.image .front:hover label {
+.image .front label.caption {
+    bottom: -6em;
+}
+
+.image .front label.likes {
+    top: -1em;
+    color: red;
+}
+
+.image .front label.likes .num {
+    color: white;
+}
+
+.image .front:hover label.caption {
     bottom: 0px;
+}
+
+.image .front:hover label.likes {
+    top: 0px;
 }
 
 .image .back {
