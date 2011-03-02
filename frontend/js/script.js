@@ -37,6 +37,17 @@ $(document).ready(function () {
 	$("#search").addClass('small');
 	find_pics(query);
     }
+
+    $(".click").toggle(function () {
+	$("#container").addClass('flip');
+    }, function () {
+	$("#container").removeClass('flip');
+    });
+    $("a").click(function (event) {
+	event.preventDefault();
+
+	
+    });
 });
 
 function find_pics(query) {

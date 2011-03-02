@@ -246,8 +246,39 @@ form.small {
 }
 
 
+.front {
+    -webkit-transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+ 
+    /* -- transition is the magic sauce for animation -- */
+    transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+}
 
+.flip .front {
+    z-index: 900;
 
+    -webkit-transform: rotateY(180deg);
+}
+
+.back {
+    -webkit-transform: rotateY(-180deg);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    
+    /* -- transition is the magic sauce for animation -- */
+    transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+}
+
+.flip .back {
+    z-index: 1000;
+			
+    -webkit-transform: rotateY(0deg);
+}
 
 
 
