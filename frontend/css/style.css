@@ -193,10 +193,12 @@ form input[type=text] {
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
     -o-border-radius: 40px;
+    padding: 0.3em;
 }
 
 form.small {
     width: 100%;
+font-size: 1.3em;
 }
 
 .image {
