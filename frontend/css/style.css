@@ -114,7 +114,7 @@ input[type="checkbox"] { vertical-align: bottom; }
 .ie6 input { vertical-align: text-bottom; }
 
 /* Hand cursor on clickable input elements */
-input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
+.about, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
 
 /* Webkit browsers add a 2px margin outside the chrome of form elements */
 button, input, select, textarea { margin: 0; }
@@ -307,16 +307,24 @@ form.small {
     display: absolute;
     top: 0px;
     right: 0px;
+    z-index: 10000;
+    float: right;
+    width: 50px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-left: 1px solid light-grey;
+    border-bottom: 1px solid grey;
+    background: #D62D2D;
     padding: 0.5em;
-    background: #F55F14;
     border-bottom-radius: 5px;
-    -webkit-border-bottom-radius: 5px;
-    -moz-border-bottom-radius: 5px;
-    -o-border-bottom-radius: 5px;
-    -moz-box-shadow: 10px 10px 5px #888;
-    -webkit-box-shadow: 10px 10px 5px #888;
-    -o-box-shadow: 10px 10px 5px #888;
-    box-shadow: 10px 10px 5px #888;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-left-radius: 10px;
+    -moz-box-shadow: 10px 3px 5px #888;
+    -webkit-box-shadow: 10px 3px 5px #888;
+    -o-box-shadow: 10px 3px 5px #888;
+    box-shadow: 10px 3px 5px #888;
 }
 
 /**

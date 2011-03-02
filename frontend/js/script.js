@@ -38,7 +38,7 @@ $(document).ready(function () {
 	find_pics(query);
     }
 
-    $(".click").toggle(function () {
+    $(".about").toggle(function () {
 	$("#container").addClass('flip');
     }, function () {
 	$("#container").removeClass('flip');
