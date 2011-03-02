@@ -209,32 +209,48 @@ form.small {
     height: 306px;
     overflow: hidden;
 }
+.image, .image .front, .image .back {
+    display: block;
+    float: left;
+    position: relative;
+    width: 306px;
+    height: 306px;
+    overflow: hidden;
+}
 
-.image img {
+.image .front, .image .back {
+position: absolute;
+top: 0px;
+left: 0px;
+}
+
+.image .front img {
     display: block;
     position: absolute;
     z-index: 0;
 }
 
-.image label {
+.image .front label {
     display: block;
     position: absolute;
+z-index: 1;
+left: 0px;
+bottom: 0px;
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
     color: white;
     width: 306px;
     max-width: 306px;
-    bottom: -6em;
     word-wrap: break-word;
     text-align: justify;
-    transition: bottom ease-out 300ms;
-    -webkit-transition: bottom ease-out 300ms;
+    /*transition: bottom ease-out 300ms;
+    -webkit-transition: opacity ease-out 300ms;
     -moz-transition: bottom ease-out 300ms;
-    -o-transition: bottom ease-out 300ms;
+    -o-transition: bottom ease-out 300ms;*/
 }
 
-.image:hover label {
-    bottom: 0em;
+.image .front:hover label {
+/*opacity: 1.0;*/
 }
 
 #error {
@@ -247,6 +263,7 @@ form.small {
 
 
 .front {
+z-index: 2;
     -webkit-transform: rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -258,12 +275,13 @@ form.small {
 }
 
 .flip .front {
-    z-index: 900;
+    z-index: 0;
 
     -webkit-transform: rotateY(180deg);
 }
 
 .back {
+z-index: 0;
     -webkit-transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -275,7 +293,7 @@ form.small {
 }
 
 .flip .back {
-    z-index: 1000;
+    z-index: 0;
 			
     -webkit-transform: rotateY(0deg);
 }
