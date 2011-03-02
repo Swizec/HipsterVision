@@ -34,6 +34,7 @@ $(document).ready(function () {
     var query = getQuerystring('search', '');
 
     if (query != '') {
+	$("#search").addClass('small');
 	find_pics(query);
     }
 });
