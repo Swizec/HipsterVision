@@ -75,7 +75,7 @@ function find_pics(query) {
 		     });
 }
 
-// random find on internets and fix'd a bit
+// random find on internets and fixd a bit
 function isodatetime(today) {
     var today = today || new Date();
     var year = today.getYear();
@@ -134,7 +134,15 @@ function display_images(images) {
     for (var i = 0; i < images.length; i++) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	$proto.clone().attr('class', 'image').attr('id', 'image-'+i).appendTo($target).find('img').attr('src', images[i].images.low_resolution.url).siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
+	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i).appendTo($target);
+
+	$image.find('img').attr('src', images[i].images.low_resolution.url);
+	$image.siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
+	
+	var $comments = $image.find('.back ul');
+	for (var j = 0; j < images[i].comments.data; j++) {
+	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
+	}
     }
 
     $('time').timeago();
