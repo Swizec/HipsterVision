@@ -253,9 +253,13 @@ form.small {
     bottom: 0px;
 }
 
+.image .back {
+    padding: 5px;
+}
+
 .image .back ul {
     display: block;
-    height: 306px;
+    height: 280px;
     width: 306px;
     overflow: auto;
 }
