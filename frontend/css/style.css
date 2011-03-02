@@ -187,7 +187,7 @@ a:hover { color: #036; }
     z-index: 1;
     position: absolute;
     padding: 1.5em;
-    background: black;
+    background: rgba(0,0,0, 0.6);
     color: white;
     width: 100%;
     bottom: 0px;
