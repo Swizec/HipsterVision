@@ -282,7 +282,7 @@ form.small {
 
 #about {
     position: absolute;
-    top: 0px;
+    top: 30px;
     width: 100%;
 }
 
@@ -313,7 +313,7 @@ form.small {
     border-left: 1px solid light-grey;
     border-bottom: 1px solid grey;
     background: #D62D2D;
-    padding: 0.5em 1em 0.5em 1em;
+    padding: 0.1em 1em 0.5em 1em;
     border-bottom-radius: 5px;
     -webkit-border-bottom-right-radius: 10px;
     -moz-border-radius-bottomright: 10px;
