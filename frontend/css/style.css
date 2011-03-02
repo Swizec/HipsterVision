@@ -208,6 +208,7 @@ form.small {
     width: 306px;
     height: 306px;
     overflow: hidden;
+    cursor: pointer;
 }
 .image, .image .front, .image .back {
     display: block;
@@ -395,6 +396,16 @@ form.small {
     width: 200px;
     height: 30px;
     margin-bottom: -30px;
+    font-size: 1.5em;
+}
+
+.freelance h2 {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+
+.freelance p {
+    margin-bottom: 0.2em;
 }
 
 /**
