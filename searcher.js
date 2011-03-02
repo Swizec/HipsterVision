@@ -15,7 +15,7 @@ var server = http.createServer(function (req, res) {
 				distance: 5000},
 			       function (images, error) {
 				   res.writeHead(200);
-				   res.write(JSON.stringify(images));
+				   res.write(JSON.stringify({images: images}));
 				   res.end();
 			       });
     }
