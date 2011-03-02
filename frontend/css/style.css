@@ -173,6 +173,25 @@ a:hover { color: #036; }
 
 header {
     font-family: Hawaii;
+    font-size: 6em;
+    text-align: center;
+    margin-bottom: 0.3em;
+}
+
+form {
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    font-size: 2em;
+    line-height: 2em;
+}
+
+form input[type=text] {
+    width: 450px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -o-border-radius: 40px;
 }
 
 .image {
