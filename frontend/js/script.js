@@ -44,11 +44,14 @@ $(document).ready(function () {
 	$("#container").removeClass('flip');
     });
 
-    $(".image").toggle(function () {
-	$(this).addClass('flip');
-    }, function () {
-	$(this).addClass('flip');
-    });
+    $(".image").live('click', function () {
+        var $this = $(this);
+	if ($this.hasClass('flip')) {
+		$this.removeClass('flip');
+	}else{
+   		$(this).addClass('flip');
+	}    
+});
 
     $('time').timeago();
 });
