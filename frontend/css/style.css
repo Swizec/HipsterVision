@@ -280,6 +280,10 @@ form.small {
     -webkit-transform: rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
+
+    -moz-transform: rotateY(0deg);
+    -moz-transform-style: preserve-3d;
+    -moz-backface-visibility: hidden;
  
     /* -- transition is the magic sauce for animation -- */
     transition: all .4s ease-in-out;
@@ -298,6 +302,10 @@ form.small {
     -webkit-transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
+
+    -moz-transform: rotateY(-180deg);
+    -moz-transform-style: preserve-3d;
+    -moz-backface-visibility: hidden;
     
     /* -- transition is the magic sauce for animation -- */
     transition: all .4s ease-in-out;
@@ -366,6 +374,14 @@ form.small {
     -o-box-shadow: 10px 3px 5px #888;
     box-shadow: 10px 3px 5px #888;
 }
+
+.shares {
+    display: absolute;
+    top: 40px;
+    left: 0px;
+    width: 100px;
+}
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
