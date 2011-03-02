@@ -169,7 +169,7 @@ a:hover { color: #036; }
  * Author: Swizec
  */
 
-@font-face { font-family: Hawaii; src: url('css/Hawaii_Killer.ttf'); } 
+@font-face { font-family: Hawaii; src: url('/css/Hawaii_Killer.ttf'); } 
 
 header {
     font-family: Hawaii;
@@ -253,9 +253,14 @@ form.small {
     bottom: 0px;
 }
 
+.image .back {
+    padding: 5px;
+    background: white;
+}
+
 .image .back ul {
     display: block;
-    height: 306px;
+    height: 280px;
     width: 306px;
     overflow: auto;
 }
@@ -281,7 +286,7 @@ form.small {
     -webkit-transition: all .4s ease-in-out;
 }
 
-.flip .front {
+.flip .front, div:target .front {
     z-index: 900;
 
     -webkit-transform: rotateY(180deg);
@@ -299,7 +304,7 @@ form.small {
     -webkit-transition: all .4s ease-in-out;
 }
 
-.flip .back {
+.flip .back, div:target .back {
     z-index: 1000;
 			
     -webkit-transform: rotateY(0deg);
@@ -309,6 +314,8 @@ form.small {
     position: absolute;
     top: 30px;
     left: 0px;
+    min-height: 100%;
+    width: 100%;
     background: white;
 }
 

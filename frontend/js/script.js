@@ -46,11 +46,14 @@ $(document).ready(function () {
 	$(".image").css({display: "inline-block"});
     });
 
-    $(".image").toggle(function () {
-	$(this).addClass('flip');
-    }, function () {
-	$(this).addClass('flip');
-    });
+    $(".image").live('click', function () {
+        var $this = $(this);
+	if ($this.hasClass('flip')) {
+		$this.removeClass('flip');
+	}else{
+   		$(this).addClass('flip');
+	}    
+});
 
     $('time').timeago();
 
@@ -150,7 +153,7 @@ function display_images(images) {
 	$image.appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
-	$image.siblings('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
+	$image.find('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
 	
 	var $comments = $image.find('.back ul');
 	for (var j = 0; j < images[i].comments.data; j++) {
