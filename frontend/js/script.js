@@ -156,7 +156,7 @@ function display_images(images) {
 	$image.find('label').html('<strong>'+images[i].user.username+'</strong> <time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
 	
 	var $comments = $image.find('.back ul');
-	for (var j = 0; j < images[i].comments.data; j++) {
+	for (var j = 0; j < images[i].comments.count; j++) {
 	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
 	}
     }
