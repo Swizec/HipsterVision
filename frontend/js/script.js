@@ -25,6 +25,7 @@ $(document).ready(function () {
 
     if (query != '') {
 	$("#search").addClass('small');
+	$("#more").css({display: 'block'}).waypoint(infinite_scroll, {offset: function () {return $.waypoints('viewportHeight') - $(this).outerHeight() + 612;}});
 	find_pics(query);
     }
 
@@ -62,8 +63,6 @@ $(document).ready(function () {
 	    'query': $('form input[type="text"]').val()
 	});
     });
-
-    $("#more").waypoint(infinite_scroll);
 });
 
 function find_pics(query, before) {
@@ -132,7 +131,7 @@ function display_images(images) {
 	if (i < images.length-1) { 
            setTimeout(function () { display_image(i+1) }, 50);
 	}else{
-	    $.waypoint('refresh');
+	   $.waypoints('refresh');
 	}
 
 	$image.find('time').timeago();
@@ -144,6 +143,7 @@ function display_images(images) {
 function infinite_scroll(event, direction) {
     if (direction === 'down') {
 	find_pics($("form input[type='text']").val(), oldest_timestamp);
+	mpmetrics.track('Infinite scroll');
     }
 }
 

@@ -303,6 +303,14 @@ form p.explain {
     margin: 0px;
 }
 
+#more {
+    clear: left;
+    display: none;
+    width: 100px;
+    height: 1.5em;
+    border: 1px solid red;
+}
+
 #error {
     display: none;
     font-size: 4em;
