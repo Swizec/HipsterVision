@@ -67,6 +67,12 @@ $(document).ready(function () {
 	    'query': $('form input[type="text"]').val()
 	});
     });
+
+    $('form input[type="text"]').focus(function () {
+	$("#tips").css({display: 'block'});
+    }).blur(function () {
+	$("#tips").css({display: 'none'});
+    });
 });
 
 function find_pics(query, before) {

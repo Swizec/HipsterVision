@@ -66,3 +66,4 @@ function isodatetime(today) {
 	+ hour + ":" + minute + ":" + second;
     return time;
 }
+
