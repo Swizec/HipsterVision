@@ -16,6 +16,8 @@ function getQuerystring(key, default_)
     return qs[1];
 }
 
+var oldest_timestamp = (new Date()).getTime();
+
 $(document).ready(function () {
     var query = getQuerystring('search', '');
 
@@ -60,13 +62,21 @@ $(document).ready(function () {
 	    'query': $('form input[type="text"]').val()
 	});
     });
+
+    $("#more").waypoints(infinite_scroll);
 });
 
-function find_pics(query) {
+function find_pics(query, before) {
     var do_search = function (query) {
+	var data = {search: query};
+	
+	if (before != null) {
+	    data['before'] = before;
+	}
+
 	$.ajax({url: '/search/',
 		dataType: 'json',
-		data: {search: query},
+		data: data,
 		success: function (data) { display_images(data); },
 		error: function (jqXHR, err) { error("Something fishy with the server :("); }});			     
     }
@@ -80,6 +90,7 @@ function find_pics(query) {
 			 function (result, status) {
 			     if (status == 'OK') {
 				 $("#search input[type='text']").val(result[0].formatted_address);
+
 				 do_search(result[0].geometry.location+"");
 			     }else{
 				 error("Google won't talk to us :/");
@@ -90,52 +101,6 @@ function find_pics(query) {
     }
 }
 
-// random find on internets and fixd a bit
-function isodatetime(today) {
-    var today = today || new Date();
-    var year = today.getYear();
-    if (year < 2000) // Y2K Fix, Isaac Powell
-	year = year + 1900; // http://onyx.idbsu.edu/~ipowell
-    var month = today.getMonth() + 1;
-    var day = today.getDate();
-    var hour = today.getHours();
-    var hourUTC = today.getUTCHours();
-    var diff = hour - hourUTC;
-    var hourdifference = Math.abs(diff);
-    var minute = today.getMinutes();
-    var minuteUTC = today.getUTCMinutes();
-    var minutedifference;
-    var second = today.getSeconds();
-    var timezone;
-    if (minute != minuteUTC && minuteUTC < 30 && diff < 0) { hourdifference--; }
-    if (minute != minuteUTC && minuteUTC > 30 && diff > 0) { hourdifference--; }
-    if (minute != minuteUTC) {
-	minutedifference = ":30";
-    }
-    else {
-	minutedifference = ":00";
-    }
-    if (hourdifference < 10) { 
-	timezone = "0" + hourdifference + minutedifference;
-    }
-    else {
-	timezone = "" + hourdifference + minutedifference;
-    }
-    if (diff < 0) {
-	timezone = "-" + timezone;
-    }
-    else {
-	timezone = "+" + timezone;
-    }
-    if (month <= 9) month = "0" + month;
-    if (day <= 9) day = "0" + day;
-    if (hour <= 9) hour = "0" + hour;
-    if (minute <= 9) minute = "0" + minute;
-    if (second <= 9) second = "0" + second;
-    time = year + "-" + month + "-" + day + "T"
-	+ hour + ":" + minute + ":" + second;
-    return time;
-}
 
 function display_images(images) {
     var images = images.images;
@@ -149,6 +114,8 @@ function display_images(images) {
     var display_image = function (i) {
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
+	oldest_timestamp = images[i].created_time;
+
 	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i);
 	$image.appendTo($target);
 
@@ -162,7 +129,11 @@ function display_images(images) {
 	}
 	
 	$image.find('time').timeago();
-	if (i < images.length) { setTimeout(function () {display_image(i+1)}, 50) };
+	if (i < images.length) { 
+           setTimeout(function () { display_image(i+1) }, 50);
+	}else{
+	    $.waypoints('refresh');
+	}
 
 	$image.find('time').timeago();
     }
@@ -170,7 +141,14 @@ function display_images(images) {
     display_image(0);
 }
 
+function infinite_scroll(event, direction) {
+    if (direction === 'down') {
+	find_pics($("form input[type='text']").val(), oldest_timestamp);
+    }
+}
+
 
 function error(msg) {
     $("#error").html(msg).css({display: 'block'});
+    $("#more").css({display: 'none'});
 }
