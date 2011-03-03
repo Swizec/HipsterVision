@@ -458,6 +458,13 @@ form p.explain {
     margin-top: -0.5em;
 }
 
+#tips {
+position: absolute;
+border: 1px solid red;
+width: 450px;
+padding: 0.3em;
+}
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
