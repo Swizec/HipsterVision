@@ -306,9 +306,8 @@ form p.explain {
 #more {
     clear: left;
     display: none;
-    width: 100px;
-    height: 1.5em;
-    border: 1px solid red;
+    width: 40px;
+    height: 40px;
 }
 
 #error {
