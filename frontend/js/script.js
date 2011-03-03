@@ -17,20 +17,6 @@ function getQuerystring(key, default_)
 }
 
 $(document).ready(function () {
-    var long_poll = function () {
-	window.log("polling ...");
-	$.get('/publish/', function (data) {
-
-	    if (data != '') {
-		$("#main").append('<img src="'+data+'" />');
-	    }
-
-	    long_poll();
-	});
-    }
-
-    //long_poll();
-
     var query = getQuerystring('search', '');
 
     if (query != '') {
@@ -52,15 +38,21 @@ $(document).ready(function () {
 		$this.removeClass('flip');
 	}else{
    		$(this).addClass('flip');
-	}    
-});
-
+	}   
+    });
+    
     $('time').timeago();
 
     $('.popular').click(function (event) {
 	event.preventDefault();
 
 	window.location.href = "http://hipstervision.org/?search=!popular";
+    });
+
+    $('form').submit(function () {
+	mpmetric.track('Search', {
+	    'query': $('form input[type="text"]').val()
+	});
     });
 });
 
