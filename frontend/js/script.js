@@ -28,7 +28,7 @@ $(document).ready(function () {
 	$("#container").addClass('flip');
 	$(".image").css({display: "none"});
 
-	mpmetrick.track('Clicked about');
+	mpmetrics.track('Clicked about');
 
     }, function () {
 	$("#container").removeClass('flip');
@@ -40,7 +40,7 @@ $(document).ready(function () {
 	if ($this.hasClass('flip')) {
 	    $this.removeClass('flip');
 	}else{
-	    mpmetrick.track('Clicked image', {
+	    mpmetrics.track('Clicked image', {
 		'position': $this.attr('id').split('-')[1]
 	    });
    	    $(this).addClass('flip');
@@ -50,11 +50,11 @@ $(document).ready(function () {
     $('time').timeago();
 
     $('.popular').click(function (event) {
-	mpmetrick.track('Popular');
+	mpmetrics.track('Popular');
     });
 
     $('form').submit(function () {
-	mpmetric.track('Search', {
+	mpmetrics.track('Search', {
 	    'query': $('form input[type="text"]').val()
 	});
     });
