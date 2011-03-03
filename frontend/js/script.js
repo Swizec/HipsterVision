@@ -19,6 +19,8 @@ function getQuerystring(key, default_)
 $(document).ready(function () {
     var query = getQuerystring('search', '');
 
+    mpmetrics.track('Loaded page');
+
     if (query != '') {
 	$("#search").addClass('small');
 	find_pics(query);
