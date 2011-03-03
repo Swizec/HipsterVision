@@ -25,7 +25,11 @@ $(document).ready(function () {
 
     if (query != '') {
 	$("#search").addClass('small');
-	$("#more").css({display: 'block'}).waypoint(infinite_scroll, {offset: function () {return $.waypoints('viewportHeight') - $(this).outerHeight() + 612;}});
+	$("#more").css({display: 'block'})
+	    .waypoint(infinite_scroll, 
+		      {offset: function () {
+			  return $.waypoints('viewportHeight') - $(this).outerHeight() + 612;}
+		      });
 	find_pics(query);
     }
 
