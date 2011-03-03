@@ -20,7 +20,7 @@ var oldest_timestamp = (new Date()).getTime();
 
 $(document).ready(function () {
     var query = getQuerystring('search', '');
-
+    
     mpmetrics.track('Loaded page');
 
     if (query != '') {
@@ -84,6 +84,8 @@ function find_pics(query, before) {
 		error: function (jqXHR, err) { error("Something fishy with the server :("); }});			     
     }
 
+    if (query == '') { return 0; };
+
     if (query != '!popular') {
 	var geocoder = new google.maps.Geocoder();
 
@@ -96,10 +98,12 @@ function find_pics(query, before) {
 
 				 do_search(result[0].geometry.location+"");
 			     }else{
+				alert("eh!?");
 				 error("Google won't talk to us :/");
 			     }
 			 });
     }else{
+	alert("popular!");
 	do_search(query);
     }
 }
