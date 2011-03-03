@@ -2,8 +2,9 @@
 var http = require('http'),
     querystring = require('querystring'),
     urllib = require('url'),
-    instagram = require('instagram').createClient('d1ca75d66977495db80ff240d54eb6d4',
-						  '74adf5ff7a26481c810b5cf8cb7f1e8b');
+    settings = require('./settings.js'),
+    instagram = require('instagram').createClient(settings.client_id,
+						  settings.client_secret);
 
 
 var server = http.createServer(function (req, res) {
