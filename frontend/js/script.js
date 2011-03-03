@@ -98,12 +98,10 @@ function find_pics(query, before) {
 
 				 do_search(result[0].geometry.location+"");
 			     }else{
-				alert("eh!?");
 				 error("Google won't talk to us :/");
 			     }
 			 });
     }else{
-	alert("popular!");
 	do_search(query);
     }
 }
