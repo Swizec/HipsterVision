@@ -63,7 +63,7 @@ $(document).ready(function () {
 	});
     });
 
-    $("#more").waypoints(infinite_scroll);
+    $("#more").waypoint(infinite_scroll);
 });
 
 function find_pics(query, before) {
@@ -132,7 +132,7 @@ function display_images(images) {
 	if (i < images.length-1) { 
            setTimeout(function () { display_image(i+1) }, 50);
 	}else{
-	    $.waypoints('refresh');
+	    $.waypoint('refresh');
 	}
 
 	$image.find('time').timeago();
