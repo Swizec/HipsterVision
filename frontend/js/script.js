@@ -44,9 +44,7 @@ $(document).ready(function () {
     $('time').timeago();
 
     $('.popular').click(function (event) {
-	event.preventDefault();
-
-	window.location.href = "http://hipstervision.org/?search=!popular";
+	mpmetrick.track('Popular');
     });
 
     $('form').submit(function () {

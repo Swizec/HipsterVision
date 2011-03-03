@@ -444,6 +444,12 @@ form p.explain {
     margin-bottom: 0.2em;
 }
 
+.popular {
+    font-size: 0.6em; 
+    display: block; 
+    margin-top: -0.5em;
+}
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
