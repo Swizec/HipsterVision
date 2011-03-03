@@ -466,13 +466,13 @@ form p.explain {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
-    width: 450px;
-    padding: 0.5em;
-    margin-left: 15px;
+    width: 460px;
+    padding: 6px;
     font-size: 0.8em;
     line-height: 1.1em;
     display: none;
     color: #666;
+    z-index: 1200;
 }
 
 /**

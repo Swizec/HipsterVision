@@ -69,7 +69,7 @@ $(document).ready(function () {
     });
 
     $('form input[type="text"]').focus(function () {
-	$("#tips").css({display: 'block', top: $(this).offset().top+$(this).height()});
+	$("#tips").css({display: 'block', top: $(this).offset().top+$(this).height()-10, left: $(this).offset().left-5, width: $(this).outerWidth()-12});
     }).blur(function () {
 	$("#tips").css({display: 'none'});
     });
