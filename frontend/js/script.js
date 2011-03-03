@@ -27,6 +27,9 @@ $(document).ready(function () {
     $(".about").toggle(function () {
 	$("#container").addClass('flip');
 	$(".image").css({display: "none"});
+
+	mpmetrick.track('Clicked about');
+
     }, function () {
 	$("#container").removeClass('flip');
 	$(".image").css({display: "inline-block"});
@@ -35,10 +38,13 @@ $(document).ready(function () {
     $(".image").live('click', function () {
         var $this = $(this);
 	if ($this.hasClass('flip')) {
-		$this.removeClass('flip');
+	    $this.removeClass('flip');
 	}else{
-   		$(this).addClass('flip');
-	}   
+	    mpmetrick.track('Clicked image', {
+		'position': $this.attr('id').split('-')[1]
+	    });
+   	    $(this).addClass('flip');
+	}
     });
     
     $('time').timeago();
