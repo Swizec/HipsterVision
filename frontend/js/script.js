@@ -134,6 +134,8 @@ function display_images(images) {
         }
     }
 
+    var image_id = $(".image").size();
+
     var display_image = function (i) {
 	if (typeof(images[i]) == 'undefined') {
 	    tail(i);
@@ -144,7 +146,7 @@ function display_images(images) {
 	d.setTime(images[i].created_time*1000);
 	oldest_timestamp = images[i].created_time;
 
-	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i);
+	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
 	$image.appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
