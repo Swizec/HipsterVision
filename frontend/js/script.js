@@ -114,13 +114,17 @@ function display_images(images) {
 	error("No hipsters in "+$("#search input[type='text']").val()+" :'(");
     }
 
+    var tail = function (i) {
+	if (i < images.length-1) {
+	    setTimeout(function () { display_image(i+1) }, 50);
+        }else{
+	    $.waypoints('refresh');
+        }
+    }
+
     var display_image = function (i) {
 	if (typeof(images[i]) == 'undefined') {
-	     if (i < images.length-1) {
-           setTimeout(function () { display_image(i+1) }, 50);
-        }else{
-           $.waypoints('refresh');
-        }
+	    tail(i);
 	    return;
 	}
 	
@@ -141,13 +145,7 @@ function display_images(images) {
 	}
 	
 	$image.find('time').timeago();
-	if (i < images.length-1) { 
-           setTimeout(function () { display_image(i+1) }, 50);
-	}else{
-	   $.waypoints('refresh');
-	}
-
-	$image.find('time').timeago();
+	tail(i);
     }
 
     display_image(0);
