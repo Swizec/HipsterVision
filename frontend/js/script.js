@@ -129,7 +129,7 @@ function display_images(images) {
 	}
 	
 	$image.find('time').timeago();
-	if (i < images.length) { 
+	if (i < images.length-1) { 
            setTimeout(function () { display_image(i+1) }, 50);
 	}else{
 	    $.waypoints('refresh');
