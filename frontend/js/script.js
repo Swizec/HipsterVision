@@ -155,6 +155,7 @@ function display_images(images) {
 	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
 	}
 	
+	$image.find('time').timeago();
 	if (i < images.length) { setTimeout(function () {display_image(i+1)}, 50) };
 
 	$image.find('time').timeago();

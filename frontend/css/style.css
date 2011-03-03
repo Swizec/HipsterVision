@@ -263,6 +263,10 @@ form p.explain {
     bottom: -6em;
 }
 
+.image .front label.caption time {
+   padding-left: 1em;
+}
+
 .image .front label.likes {
     top: -5em;
     color: red;
