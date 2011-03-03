@@ -308,6 +308,7 @@ form p.explain {
     display: none;
     width: 40px;
     height: 40px;
+    margin: 15px auto;
 }
 
 #error {

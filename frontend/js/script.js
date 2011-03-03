@@ -115,6 +115,15 @@ function display_images(images) {
     }
 
     var display_image = function (i) {
+	if (typeof(images[i]) == 'undefined') {
+	     if (i < images.length-1) {
+           setTimeout(function () { display_image(i+1) }, 50);
+        }else{
+           $.waypoints('refresh');
+        }
+	    return;
+	}
+	
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
 	oldest_timestamp = images[i].created_time;
