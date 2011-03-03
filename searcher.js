@@ -17,14 +17,18 @@ var server = http.createServer(function (req, res) {
 	res.end();
     }
 
-    var perform_search = function (query) {
+    var perform_search = function (query, before) {
 	if (query != '!popular') {
 	    var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
+	    
+	    var options = {lat: geocode[0],
+			   lng: geocode[1],
+			   distance: 5000};
+	    if (before != null) {
+		options.max_timestamp = before;
+	    }
 
-	    instagram.media.search({lat: geocode[0],
-				    lng: geocode[1],
-				    distance: 5000},
-				  respond);
+	    instagram.media.search(options, respond);
 	}else{
 	    instagram.media.popular(respond);
 	}
@@ -36,12 +40,14 @@ var server = http.createServer(function (req, res) {
 	    raw += chunk;
 	});
 	req.on('end', function () {
-	    var query = querystring.parse(raw)['search'];
-	    perform_search(query)
+	    var query = querystring.parse(raw);
+
+	    perform_search(query['search'], query['before']);
 	});
     }else{
-	var query = querystring.parse(urllib.parse(req.url)['query'])['search'];
-	perform_search(query);
+	var query = querystring.parse(urllib.parse(req.url)['query']);
+
+	perform_search(query['search'], query['before']);
     }
 });
 

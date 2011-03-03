@@ -263,6 +263,10 @@ form p.explain {
     bottom: -6em;
 }
 
+.image .front label.caption time {
+   padding-left: 1em;
+}
+
 .image .front label.likes {
     top: -5em;
     color: red;
@@ -297,6 +301,14 @@ form p.explain {
     width: 280px;
     overflow: auto;
     margin: 0px;
+}
+
+#more {
+    clear: left;
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin: 15px auto;
 }
 
 #error {
@@ -438,6 +450,12 @@ form p.explain {
 
 .freelance p {
     margin-bottom: 0.2em;
+}
+
+.popular {
+    font-size: 0.6em; 
+    display: block; 
+    margin-top: -0.5em;
 }
 
 /**

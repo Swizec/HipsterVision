@@ -11,6 +11,7 @@
 /* THANKS */
   Names (& URL): 
 http://html5boilerplate.com/
+http://imakewebthings.github.com/jquery-waypoints/
 
 /* SITE */
   Standards: HTML5, CSS3
