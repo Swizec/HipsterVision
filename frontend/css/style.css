@@ -459,10 +459,18 @@ form p.explain {
 }
 
 #tips {
-position: absolute;
-border: 1px solid red;
-width: 450px;
-padding: 0.3em;
+    position: absolute;
+    border: 3px solid #3BDB1F;
+    background: #85EB73;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 450px;
+    padding: 0.5em;
+    margin-left: 15px;
+    font-size: 0.8em;
+    display: none;
 }
 
 /**
