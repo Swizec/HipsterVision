@@ -164,11 +164,11 @@ function display_images(images) {
 	}
 	
 	if (i < images.length) { setTimeout(function () {display_image(i+1)}, 50) };
+
+	$image.find('time').timeago();
     }
 
     display_image(0);
-
-    $('time').timeago();
 }
 
 
