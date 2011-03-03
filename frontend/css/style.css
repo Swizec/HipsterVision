@@ -470,7 +470,9 @@ form p.explain {
     padding: 0.5em;
     margin-left: 15px;
     font-size: 0.8em;
+    line-height: 1.1em;
     display: none;
+    color: #666;
 }
 
 /**
