@@ -18,7 +18,16 @@ var server = http.createServer(function (req, res) {
     }
 
     var perform_search = function (query, before) {
-	if (query != '!popular') {
+	console.log(query);
+	if (query == '!popular') {
+	    instagram.media.popular(respond);
+	}else if (query.charAt(0) == '#') {
+	    instagram.tags.search(query.replace('#', ''), function (tags, error) {
+		instagram.tags.media(tags[0].name, function (images, error) {
+		    respond({tags: tags, images: images}, error);
+		});
+	    });
+	}else{
 	    var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
 	    
 	    var options = {lat: geocode[0],
@@ -29,25 +38,17 @@ var server = http.createServer(function (req, res) {
 	    }
 
 	    instagram.media.search(options, respond);
-	}else{
-	    instagram.media.popular(respond);
 	}
     }
 
-    if (req.method == 'POST') {
-	var raw = '';
-	req.on('data', function (chunk) {
-	    raw += chunk;
-	});
-	req.on('end', function () {
-	    var query = querystring.parse(raw);
-
-	    perform_search(query['search'], query['before']);
-	});
-    }else{
+    if (req.method == 'GET') {
 	var query = querystring.parse(urllib.parse(req.url)['query']);
 
 	perform_search(query['search'], query['before']);
+    }else{
+	res.writeHead(200);
+	res.write('We like searches via GET');
+	res.end();
     }
 });
 
