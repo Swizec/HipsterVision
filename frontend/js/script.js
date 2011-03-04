@@ -96,7 +96,11 @@ function find_pics(query, before) {
 
     if (query == '') { return 0; };
 
-    if (query != '!popular') {
+    if (query == '!popular') {
+	do_search(query);
+    }else if (query.charAt(0) == '#') {
+	do_search(query);
+    }else{
 	var geocoder = new google.maps.Geocoder();
 
 	$("title").html("We're having new age fun with a vintage feel in "+query+"!");
@@ -111,8 +115,6 @@ function find_pics(query, before) {
 				 error("Google won't talk to us :/");
 			     }
 			 });
-    }else{
-	do_search(query);
     }
 }
 

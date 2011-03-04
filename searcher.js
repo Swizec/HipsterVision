@@ -8,8 +8,12 @@ var http = require('http'),
 
 
 var server = http.createServer(function (req, res) {
-    var respond = function (images, error) {
-	var body = JSON.stringify({images: images}); 
+    var respond = function (images, error, tags) {
+	if (tags != null) {
+	    var body = JSON.stringify({images: images, tags: tags}); 
+	}else{
+	    var body = JSON.stringify({images: images}); 
+	}
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
 	});
@@ -24,7 +28,7 @@ var server = http.createServer(function (req, res) {
 	}else if (query.charAt(0) == '#') {
 	    instagram.tags.search(query.replace('#', ''), function (tags, error) {
 		instagram.tags.media(tags[0].name, function (images, error) {
-		    respond({tags: tags, images: images}, error);
+		    respond(images, error, tags);
 		});
 	    });
 	}else{
