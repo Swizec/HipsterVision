@@ -30,7 +30,11 @@ var server = http.createServer(function (req, res) {
 		if (before != null) {
 		    options.min_id = before.split(':')[1];
 		}
-		instagram.tags.media(tags[0].name, options, function (images, error, pagination) {
+		var tag = query.replace('#', '');
+		if (tags.length > 0) {
+		   tag = tags[0].name;
+		}
+		instagram.tags.media(tag, options, function (images, error, pagination) {
 			console.log(pagination);
 		    respond(images, error, {tags: tags, pagination: pagination});
 		});
