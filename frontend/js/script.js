@@ -87,7 +87,7 @@ function find_pics(query, before) {
 	if (before != null) {
 	    data['before'] = before;
 	}
-
+	log(data);
 	$.ajax({url: '/search/',
 		dataType: 'json',
 		data: data,
@@ -96,9 +96,7 @@ function find_pics(query, before) {
     }
 
     if (query == '') { return 0; };
-
 query = decodeURIComponent(query);
-
     if (query == '!popular') {
 	do_search(query);
     }else if (query.charAt(0) == '#') {
@@ -175,7 +173,7 @@ function display_images(images) {
 function infinite_scroll(event, direction) {
     if (direction === 'down') {
 	var before = oldest_image.timestamp+":"+oldest_image.id;
-	find_pics($("form input[type='text']").val(), before);
+ 	find_pics(getQuerystring('search', ''), before);
 	mpmetrics.track('Infinite scroll');
     }
 }

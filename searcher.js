@@ -28,8 +28,9 @@ var server = http.createServer(function (req, res) {
 	    instagram.tags.search(query.replace('#', ''), function (tags, error) {
 		var options = {};
 		if (before != null) {
-		    options.max_id = before.split(':')[1];
+		    options.min_id = before.split(':')[1];
 		}
+		console.log(options);
 		instagram.tags.media(tags[0].name, options, function (images, error) {
 		    respond(images, error, tags);
 		});
