@@ -127,6 +127,10 @@ function display_images(images) {
     }
     if (typeof(images.tags) != 'undefined') {
 	pagination_data.tags = images.tags;
+	$tags = $(".tags").html('Try: ');
+	for (var i=0; i<images.tags.length; i++) {
+	    $tags.append('<a href="?search=%23'+images.tags[i].name+'>'+images.tags[i].name+'</a> ');
+	}
     }
 
     var images = images.images;
