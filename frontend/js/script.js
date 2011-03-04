@@ -16,7 +16,9 @@ function getQuerystring(key, default_)
     return qs[1];
 }
 
-var oldest_timestamp = (new Date()).getTime();
+var pagination_data = {'timestamp': (new Date()).getTime(),
+		       'id': 0,
+		       'tag_index': 0};
 
 $(document).ready(function () {
     var query = getQuerystring('search', '');
@@ -67,6 +69,20 @@ $(document).ready(function () {
 	    'query': $('form input[type="text"]').val()
 	});
     });
+
+    $('form input[type="text"]').focus(function () {
+	var $this = $(this);
+	$("#tips").css({display: 'block', 
+			top: ($this.offset().top+$(this).height()-10)+"px", 
+			left: ($this.offset().left-5)+"px", 
+			width: ($this.outerWidth()-12)+"px"});
+    }).blur(function () {
+	$("#tips").css({display: 'none'});
+    });
+
+    $('.tags a').live('click', function () {
+	mpmetrics.track('Clicked suggestion');
+    });
 });
 
 function find_pics(query, before) {
@@ -76,7 +92,6 @@ function find_pics(query, before) {
 	if (before != null) {
 	    data['before'] = before;
 	}
-
 	$.ajax({url: '/search/',
 		dataType: 'json',
 		data: data,
@@ -85,8 +100,13 @@ function find_pics(query, before) {
     }
 
     if (query == '') { return 0; };
-
-    if (query != '!popular') {
+query = decodeURIComponent(query);
+    if (query == '!popular') {
+	do_search(query);
+    }else if (query.charAt(0) == '#') {
+	$("#search input[type='text']").val(query);
+	do_search(query);
+    }else{
 	var geocoder = new google.maps.Geocoder();
 
 	$("title").html("We're having new age fun with a vintage feel in "+query+"!");
@@ -101,13 +121,22 @@ function find_pics(query, before) {
 				 error("Google won't talk to us :/");
 			     }
 			 });
-    }else{
-	do_search(query);
     }
 }
 
 
 function display_images(images) {
+    if (typeof(images.pagination) != 'undefined') {
+	pagination_data.id = images.pagination.next_max_id || -1;
+    }
+    if (typeof(images.tags) != 'undefined') {
+	pagination_data.tags = images.tags;
+	var $tags = $(".tags").html('Try: ');
+	for (var i=1; i<images.tags.length && i < 10; i++) {
+	   $tags.append('<a href="?search=%23'+images.tags[i].name+'">#'+images.tags[i].name+'</a>');
+	}
+    }
+
     var images = images.images;
     var $target = $("#display");
     var $proto = $("#proto-image");
@@ -124,6 +153,8 @@ function display_images(images) {
         }
     }
 
+    var image_id = $(".image").size();
+
     var display_image = function (i) {
 	if (typeof(images[i]) == 'undefined') {
 	    tail(i);
@@ -132,9 +163,10 @@ function display_images(images) {
 	
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	oldest_timestamp = images[i].created_time;
 
-	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+i);
+	pagination_data.timestamp = images[i].created_time;
+
+	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
 	$image.appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
@@ -154,8 +186,17 @@ function display_images(images) {
 }
 
 function infinite_scroll(event, direction) {
+    if ($("#more").offset().top < 500) return;
     if (direction === 'down') {
-	find_pics($("form input[type='text']").val(), oldest_timestamp);
+	log('Scrolling!');
+	var before = pagination_data.timestamp+":"+pagination_data.id;
+	if (pagination_data.id > -1) {
+	    var query = (pagination_data.tag_index > 0) ? '#'+pagination_data.tags[pagination_data.tag_index] : getQuerystring('search', '');
+	    find_pics(query, before);
+	}else{
+	    pagination_data.tag_index += 1;
+	    find_pics('#'+pagination_data.tags[pagination_data.tag_index].name, before);
+	}
 	mpmetrics.track('Infinite scroll');
     }
 }
