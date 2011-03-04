@@ -100,6 +100,7 @@ query = decodeURIComponent(query);
     if (query == '!popular') {
 	do_search(query);
     }else if (query.charAt(0) == '#') {
+	$("#search input[type='text']").val(query);
 	do_search(query);
     }else{
 	var geocoder = new google.maps.Geocoder();
