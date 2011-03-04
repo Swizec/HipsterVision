@@ -123,6 +123,10 @@ query = decodeURIComponent(query);
 
 
 function display_images(images) {
+    if (typeof(images.pagination) != 'undefined') {
+	oldest_image.id = images.pagination.next_max_id;
+    }
+
     var images = images.images;
     var $target = $("#display");
     var $proto = $("#proto-image");
@@ -151,7 +155,6 @@ function display_images(images) {
 	d.setTime(images[i].created_time*1000);
 
 	oldest_image.timestamp = images[i].created_time;
-	oldest_image.id = images[i].id;
 
 	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
 	$image.appendTo($target);
