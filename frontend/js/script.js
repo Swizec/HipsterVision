@@ -79,6 +79,10 @@ $(document).ready(function () {
     }).blur(function () {
 	$("#tips").css({display: 'none'});
     });
+
+    $('.tags a').live('click', function () {
+	mpmetrics.track('Clicked suggestion');
+    });
 });
 
 function find_pics(query, before) {
