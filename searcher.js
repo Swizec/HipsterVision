@@ -26,7 +26,11 @@ var server = http.createServer(function (req, res) {
 	    instagram.media.popular(respond);
 	}else if (query.charAt(0) == '#') {
 	    instagram.tags.search(query.replace('#', ''), function (tags, error) {
-		instagram.tags.media(tags[0].name, function (images, error) {
+		var options = {};
+		if (before != null) {
+		    options.max_id = before.split(':')[1];
+		}
+		instagram.tags.media(tags[0].name, options, function (images, error) {
 		    respond(images, error, tags);
 		});
 	    });
@@ -37,7 +41,7 @@ var server = http.createServer(function (req, res) {
 			   lng: geocode[1],
 			   distance: 5000};
 	    if (before != null) {
-		options.max_timestamp = before;
+		options.max_timestamp = before.split(':')[0];
 	    }
 
 	    instagram.media.search(options, respond);

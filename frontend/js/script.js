@@ -16,7 +16,8 @@ function getQuerystring(key, default_)
     return qs[1];
 }
 
-var oldest_timestamp = (new Date()).getTime();
+var oldest_image = {'timestamp': (new Date()).getTime(),
+		    'id': 0};
 
 $(document).ready(function () {
     var query = getQuerystring('search', '');
@@ -148,7 +149,9 @@ function display_images(images) {
 	
 	var d = new Date();
 	d.setTime(images[i].created_time*1000);
-	oldest_timestamp = images[i].created_time;
+
+	oldest_image.timestamp = images[i].created_time;
+	oldest_image.id = images[i].id;
 
 	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
 	$image.appendTo($target);
@@ -171,7 +174,8 @@ function display_images(images) {
 
 function infinite_scroll(event, direction) {
     if (direction === 'down') {
-	find_pics($("form input[type='text']").val(), oldest_timestamp);
+	var before = oldest_image.timestamp+":"+oldest_image.id;
+	find_pics($("form input[type='text']").val(), before);
 	mpmetrics.track('Infinite scroll');
     }
 }
