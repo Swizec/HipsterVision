@@ -10,7 +10,7 @@ var http = require('http'),
 var server = http.createServer(function (req, res) {
     var respond = function (images, error, tags) {
 	if (tags != null) {
-	    var body = JSON.stringify({images: images, tags: tags}); 
+	    var body = JSON.stringify({images: images, tags: tags.tags, pagination: tags.pagination}); 
 	}else{
 	    var body = JSON.stringify({images: images}); 
 	}
@@ -30,9 +30,8 @@ var server = http.createServer(function (req, res) {
 		if (before != null) {
 		    options.min_id = before.split(':')[1];
 		}
-		console.log(options);
-		instagram.tags.media(tags[0].name, options, function (images, error) {
-		    respond(images, error, tags);
+		instagram.tags.media(tags[0].name, options, function (images, error, pagination) {
+		    respond(images, error, {tags: tags, pagination: pagination});
 		});
 	    });
 	}else{
