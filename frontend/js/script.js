@@ -177,7 +177,9 @@ function display_images(images) {
 }
 
 function infinite_scroll(event, direction) {
+    if ($("#more").offset().top < 500) return;
     if (direction === 'down') {
+	log('Scrolling!');
 	var before = pagination_data.timestamp+":"+pagination_data.id;
 	if (pagination_data.id > -1) {
 	    var query = (pagination_data.tag_index > 0) ? '#'+pagination_data.tags[pagination_data.tag_index] : getQuerystring('search', '');
