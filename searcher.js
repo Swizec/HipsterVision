@@ -22,7 +22,6 @@ var server = http.createServer(function (req, res) {
     }
 
     var perform_search = function (query, before) {
-	console.log(query);
 	if (query == '!popular') {
 	    instagram.media.popular(respond);
 	}else if (query.charAt(0) == '#') {

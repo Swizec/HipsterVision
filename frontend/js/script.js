@@ -96,6 +96,8 @@ function find_pics(query, before) {
 
     if (query == '') { return 0; };
 
+query = decodeURIComponent(query);
+
     if (query == '!popular') {
 	do_search(query);
     }else if (query.charAt(0) == '#') {
