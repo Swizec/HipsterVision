@@ -69,7 +69,8 @@
 	     <div id="image-<%= i %>" class="image">
 	       <div class="front">
 		 <img src="<%= images[i].images.low_resolution.url %>" />
-		 <fb:like href="http://hipstervision.org/pic/5" layout="button_count" show_faces="false" width="150"></fb:like>
+		 <fb:like href="http://hipstervision.org/pic/<%=
+	  images[i].images.id %>" layout="button_count" show_faces="false" width="150"></fb:like>
 		 <label class="likes">♥ <span class="num"><%= images[i].likes.count %></span></label>
 		 <label class="caption">
 		   <strong><%= images[i].user.username %></strong>
