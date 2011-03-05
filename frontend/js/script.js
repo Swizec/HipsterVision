@@ -89,7 +89,8 @@ $(document).ready(function () {
 
 function find_pics(query, before) {
     var do_search = function (query) {
-	var data = {search: query};
+	var data = {search: query,
+		    orig_query: $("input[type='text']").val()};
 	
 	if (before != null) {
 	    data['before'] = before;

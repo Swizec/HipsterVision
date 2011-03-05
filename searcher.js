@@ -19,7 +19,7 @@ var server = http.createServer(function (req, res) {
 	}
 
 	if ((query['before']) == 'undefined') {
-	    redis.set('HV:last-search', JSON.stringify({query: query['search'],
+	    redis.set('HV:last-search', JSON.stringify({query: query['orig_query'],
 							result: result}));
 	}
 
