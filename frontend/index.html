@@ -69,6 +69,24 @@
           <p class="explain" style="margin-top: 1.5em">PS: if you've got a javascript freelance job <a href="mailto:swizec@swizec.com">Contact me</a></p>
         </form>
 
+	<div id="frontpageresult">
+	  <% for (var i=0; i<images.length; i++) : %>
+	     <div id="image-<%= i %>" class="image">
+	       <div class="front">
+		 <img src="<%= images[i].images.low_resolution.url %>" />
+		 <label class="likes">♥ <span class="num"><%= images[i].likes.count %></span></label>
+		 <label class="caption">
+		   <strong><%= images[i].user.username %></strong>
+		   <br />
+		   <%= (images[i].caption) ? images[i].caption.text : '' %>
+		 </label>
+	       </div>
+	       <div class="back">
+	       </div>
+	     </div>
+	  <% endfor; %>
+	</div>
+
         <div id="display"></div>
 	<div id="more"><img src="/images/loader.gif" /></div>
         <div id="error"></div>
@@ -80,10 +98,7 @@
 	    <label class="caption"></label>
 	  </div>
 	  <div class="back">
-	    Comments:
-	    <ul>
-	      
-	    </ul>
+	    
 	  </div>
   	</div>
       </div>
