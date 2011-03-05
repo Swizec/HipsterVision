@@ -179,7 +179,7 @@ header {
 }
 
 header a {
-    color: inherit;
+    color: inherit !important;
     text-decoration: inherit;
 }
 
