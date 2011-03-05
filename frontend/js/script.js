@@ -26,6 +26,8 @@ $(document).ready(function () {
     mpmetrics.track('Loaded page');
 
     if (query != '') {
+	$("#frontpageresult").css({display: 'none'});
+
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
 	    .waypoint(infinite_scroll, 
