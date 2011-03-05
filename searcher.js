@@ -18,8 +18,10 @@ var server = http.createServer(function (req, res) {
 	    var result = {images: images};
 	}
 
-	redis.set('HV:last-search', JSON.stringify({query: query['search'],
-						    result: result}));
+	if ((query['before']) == 'undefined') {
+	    redis.set('HV:last-search', JSON.stringify({query: query['search'],
+							result: result}));
+	}
 
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
