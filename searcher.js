@@ -13,18 +13,18 @@ var server = http.createServer(function (req, res) {
 
     var respond = function (images, error, tags) {
 	if (tags != null) {
-	    var body = JSON.stringify({images: images, tags: tags.tags, pagination: tags.pagination}); 
+	    var result = {images: images, tags: tags.tags, pagination: tags.pagination}
 	}else{
-	    var body = JSON.stringify({images: images}); 
+	    var result = {images: images};
 	}
 
 	redis.set('HV:last-search', JSON.stringify({query: query['search'],
-						    result: body}));
+						    result: result}));
 
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
 	});
-	res.write(body);
+	res.write(JSON.stringify(result));
 	res.end();
     }
 
