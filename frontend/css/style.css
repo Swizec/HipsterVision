@@ -178,6 +178,11 @@ header {
     margin-bottom: 0.3em;
 }
 
+header a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 form {
     text-align: center;
     width: 500px;
