@@ -173,8 +173,12 @@ function display_images(images) {
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
-	$image.find('label.caption').html('<strong>'+images[i].user.username+'</strong><time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
-	
+
+	var $caption = $image.find('label.caption');
+	$caption.find('strong').html(images[i].user.username);
+	$caption.find('time').attr('datetime', isodatetime(d));
+	$caption.append((images[i].caption != null) ? '<br/>'+images[i].caption.text : '');
+
 	var $comments = $image.find('.back ul');
 	for (var j = 0; j < images[i].comments.data.length; j++) {
 	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
