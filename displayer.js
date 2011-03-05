@@ -9,8 +9,11 @@ var server = http.createServer(function (req, res) {
     res.writeHead(200);
 
     redis.get('HV:last-search', function (err, data) {
-	var images = JSON.parse(data)['result']['images'];
-
+	if (data != null) {
+	    var images = JSON.parse(data)['result']['images'];
+	}else{
+	    var images = [];
+	}
 	//console.log(images);
 	
 	fs.readFile('frontend/index.html', function(err, data) {
