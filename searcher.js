@@ -3,21 +3,35 @@ var http = require('http'),
     querystring = require('querystring'),
     urllib = require('url'),
     settings = require('./settings.js'),
+    redis = require('redis').createClient(),
     instagram = require('instagram').createClient(settings.client_id,
 						  settings.client_secret);
 
 
 var server = http.createServer(function (req, res) {
+    var query = querystring.parse(urllib.parse(req.url)['query']);
+
     var respond = function (images, error, tags) {
 	if (tags != null) {
-	    var body = JSON.stringify({images: images, tags: tags.tags, pagination: tags.pagination}); 
+	    var result = {images: images, tags: tags.tags, pagination: tags.pagination}
 	}else{
-	    var body = JSON.stringify({images: images}); 
+	    var result = {images: images};
 	}
+	
+	if (!query['before']) {
+	    redis.set('HV:last-search', JSON.stringify({query: query['orig_query'],
+							result: result}));
+	}
+
+	for (var i=0; i<images.length; i++) {
+	    redis.set('HV:imgquery:'+images[i].id, query['orig_query']);
+	    redis.expire('HV:imgquery:'+images[i].id, 3600);
+	}
+
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
 	});
-	res.write(body);
+	res.write(JSON.stringify(result));
 	res.end();
     }
 
@@ -35,7 +49,6 @@ var server = http.createServer(function (req, res) {
 		   tag = tags[0].name;
 		}
 		instagram.tags.media(tag, options, function (images, error, pagination) {
-			console.log(pagination);
 		    respond(images, error, {tags: tags, pagination: pagination});
 		});
 	    });
@@ -54,8 +67,6 @@ var server = http.createServer(function (req, res) {
     }
 
     if (req.method == 'GET') {
-	var query = querystring.parse(urllib.parse(req.url)['query']);
-
 	perform_search(query['search'], query['before']);
     }else{
 	res.writeHead(200);

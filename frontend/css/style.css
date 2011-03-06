@@ -178,6 +178,23 @@ header {
     margin-bottom: 0.3em;
 }
 
+header a {
+    color: inherit !important;
+    text-decoration: inherit;
+}
+
+#special {
+    margin: 0 auto;
+    width: 640px;
+    margin-bottom: 1.5em;
+}
+
+#special h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.7em;
+    text-align: center;
+}
+
 form {
     text-align: center;
     width: 500px;
@@ -229,6 +246,11 @@ form p.explain {
     overflow: hidden;
 }
 
+#special .image, #special .image .front, #special .image .back {
+    width: 612px;
+    height: 612px;
+}
+
 .image .front, .image .back {
     position: absolute;
     top: 0px;
@@ -270,23 +292,42 @@ form p.explain {
 .image .front label.likes {
     top: -5em;
     color: red;
-    width: 50px;
+    width: 200px;
     padding: 5px;
-    margin-left:246px;
+    margin-left:120px;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
+    background: rgba(0,0,0, 0.6);
+}
+
+#special .image .front label.likes {
+    margin-left: 420px;
 }
 
 .image .front label.likes .num {
     color: white;
+margin-right: 1em;
 }
+
 
 .image .front:hover label.caption {
     bottom: 0px;
 }
 
 .image .front:hover label.likes {
+    top: -10px;
+}
+
+.image .front .likes iframe {
+    top: 3px;
+}
+
+.image .front .likes .twitter-share-button {
+margin-top: 6px;
+margin-bottom: -6px;
+}
+.image .front:hover .liek {
     top: 0px;
 }
 

@@ -26,6 +26,8 @@ $(document).ready(function () {
     mpmetrics.track('Loaded page');
 
     if (query != '') {
+	$("#frontpageresult").css({display: 'none'});
+
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
 	    .waypoint(infinite_scroll, 
@@ -47,15 +49,10 @@ $(document).ready(function () {
     });
 
     $(".image").live('click', function () {
-        var $this = $(this);
-	if ($this.hasClass('flip')) {
-	    $this.removeClass('flip');
-	}else{
-	    mpmetrics.track('Clicked image', {
-		'position': $this.attr('id').split('-')[1]
-	    });
-   	    $(this).addClass('flip');
-	}
+	mpmetrics.track('Clicked image', {
+	    'position': $(this).attr('id').split('-')[1]
+	});
+	window.location.href = '/pic/'+$(this).attr('img_id');
     });
     
     $('time').timeago();
@@ -83,11 +80,23 @@ $(document).ready(function () {
     $('.tags a').live('click', function () {
 	mpmetrics.track('Clicked suggestion');
     });
+
+    FB.init({appId: '115797901829229', status: true, cookie: true,
+             xfbml: true});
+    FB.Event.subscribe('edge.create', function(response) {
+	mpmetrics.track('FB pic like');
+    });
+
+    $(".image .liek a").live('click', function () {
+	alert('tweet!');
+	mpmetrics.track('Tweet pic');
+    });
 });
 
 function find_pics(query, before) {
     var do_search = function (query) {
-	var data = {search: query};
+	var data = {search: query,
+		    orig_query: $("input[type='text']").val()};
 	
 	if (before != null) {
 	    data['before'] = before;
@@ -166,13 +175,25 @@ function display_images(images) {
 
 	pagination_data.timestamp = images[i].created_time;
 
-	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
-	$image.appendTo($target);
+	var $image = $proto.clone()
+	    .attr('class', 'image')
+	    .attr('id', 'image-'+(image_id+i))
+	    .attr('img_id', images[i].id)
+	    .appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
-	$image.find('label.caption').html('<strong>'+images[i].user.username+'</strong><time datetime="'+(isodatetime(d))+'" class="timeago"></time>'+((images[i].caption != null) ? '<br/>'+images[i].caption.text : ''));
-	
+	$image.find('label.likes').append('<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hipstervision.org/pic/'+images[i].id+'" data-text="Found a cool pic on hipstervision :D" data-count="none" data-via="swizec">Tweet</a>');
+	$image.find('label.likes').append('<fb:like href="http://hipstervision.org/pic/'+images[i].id+'" class="fblike" layout="button_count" show_faces="false" width="100"></fb:like>');
+
+	var $caption = $image.find('label.caption');
+	$caption.find('strong').html(images[i].user.username);
+	$caption.find('time').attr('datetime', isodatetime(d));
+	$caption.append((images[i].caption != null) ? '<br/>'+images[i].caption.text : '');
+
+	FB.XFBML.parse($image.find('label.likes')[0]);
+	make_twitter();
+
 	var $comments = $image.find('.back ul');
 	for (var j = 0; j < images[i].comments.data.length; j++) {
 	    $comments.append('<li><strong>'+images[i].comments.data[j].from.username+'</strong> '+images[i].comments.data[j].text+'</li>');
