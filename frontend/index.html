@@ -69,7 +69,7 @@
       </header>
       <div>
 	<% if (special_image) { %>
-	  <script>$(document).ready(function () { mpmetrics.track('From share')});</script>
+	  <script type="text/javascript">$(document).ready(function () { mpmetrics.track('From share')});</script>
 	  <div id="special">
 	    <h2>Your friend found this looking for <a href="/?search=<%= search_query %>">
 		<%= search_query %></a>!</h2>
@@ -247,6 +247,7 @@
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <div id="fb-root"></div>
   <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  <script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
   <!-- end scripts-->
 
 
