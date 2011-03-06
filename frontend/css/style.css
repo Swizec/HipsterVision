@@ -183,7 +183,17 @@ header a {
     text-decoration: inherit;
 }
 
-form, #special {
+#special {
+    margin: 0 auto;
+    width: 640px;
+    margin-bottom: 1.5em;
+}
+
+#special h2 {
+    font-size: 1.5em;
+}
+
+form {
     text-align: center;
     width: 500px;
     margin: 0 auto;
@@ -232,6 +242,11 @@ form p.explain {
     width: 306px;
     height: 306px;
     overflow: hidden;
+}
+
+#special .image, #special .image .front, #special .image .back {
+    width: 612px;
+    height: 612px;
 }
 
 .image .front, .image .back {
