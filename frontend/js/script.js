@@ -164,6 +164,7 @@ function display_images(images) {
 	    setTimeout(function () { display_image(i+1) }, 50);
         }else{
 	    $.waypoints('refresh');
+	    $("body").append('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
         }
     }
 
