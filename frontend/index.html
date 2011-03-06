@@ -104,7 +104,8 @@
 	<% } %>
 	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
-	     <div id="image-<%= i %>" class="image" img_id="images[i].id">
+	     <div id="image-<%= i %>" 
+		  img_id="<%= images[i].id %>" class="image">
 	       <div class="front">
 		 <img src="<%= images[i].images.low_resolution.url %>" />
 		 <label class="likes">
