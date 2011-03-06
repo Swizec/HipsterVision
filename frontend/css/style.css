@@ -275,9 +275,9 @@ form p.explain {
 .image .front label.likes {
     top: -5em;
     color: red;
-    width: 50px;
+    width: 200px;
     padding: 5px;
-    margin-left:246px;
+    margin-left:120px;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
     border-bottom-right-radius: 10px;
@@ -286,7 +286,9 @@ form p.explain {
 
 .image .front label.likes .num {
     color: white;
+margin-right: 1em;
 }
+
 
 .image .front:hover label.caption {
     bottom: 0px;
@@ -296,25 +298,14 @@ form p.explain {
     top: -10px;
 }
 
-.image .front .liek {
-    position: absolute;
-    width: 160px;
-    top: -50px;
-    transition: all ease-out 300ms;
-    -webkit-transition: all ease-out 300ms;
-    -moz-transition: all ease-out 300ms;
-    -o-transition: all ease-out 300ms;
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-bottomright: 10px;
-    border-bottom-right-radius: 10px;
-    background: rgba(0,0,0, 0.6);
-    padding: 5px;
-}
-
 .image .front .likes iframe {
-    top: -2px;
+    top: 3px;
 }
 
+.image .front .likes .twitter-share-button {
+margin-top: 6px;
+margin-bottom: -6px;
+}
 .image .front:hover .liek {
     top: 0px;
 }

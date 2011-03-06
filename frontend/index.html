@@ -65,7 +65,7 @@
        </form>
 
 	<div id="frontpageresult">
-	  <h2>Last dude searched for <%= search_query %></h2>
+	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" class="image">
 	       <div class="front">
@@ -75,7 +75,8 @@
 		    <a href="http://twitter.com/share"
 	  class="twitter-share-button"
 	  data-url="http://hipstervision.org/pic/<%= images[i].id %>"
-	  data-text="Found a cool pic on hipstervision :D" data-count="none">Tweet</a>
+	  data-text="Found a cool pic on hipstervision :D"
+	  data-count="none" data-via="swizec">Tweet</a>
 		   <fb:like href="http://hipstervision.org/pic/<%= images[i].id %>"
 		      layout="button_count" show_faces="false" width="100"></fb:like>
 		 </label>
