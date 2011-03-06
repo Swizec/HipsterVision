@@ -283,6 +283,9 @@ form p.explain {
 
 .image .front label.caption {
     bottom: -6em;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-right-radius: 10px;
 }
 
 .image .front label.caption time {
@@ -297,7 +300,7 @@ form p.explain {
     margin-left:120px;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     background: rgba(0,0,0, 0.6);
 }
 

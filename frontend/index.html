@@ -69,7 +69,7 @@
       </header>
       <div>
 	<% if (special_image) { %>
-	  <script>$(document).ready(function () { mpmetrics.track('From share')});</script>
+	  <script type="text/javascript">$(document).ready(function () { mpmetrics.track('From share')});</script>
 	  <div id="special">
 	    <h2>Your friend found this looking for <a href="/?search=<%= search_query %>">
 		<%= search_query %></a>!</h2>
@@ -180,7 +180,7 @@
       </header>     
      <article> 
       <p>HipsterVision.org is mostly the result of a sleepless February
-    night about <time datetime="2011-03-02T4:06Z"></time>. The
+    night <time datetime="2011-03-02T4:06Z"></time>. The
     Instagram API had just come out a few days earlier and I knew I
     wanted to make something with it.</p>
 
@@ -195,6 +195,11 @@
 
       <p>A night of coding later -> everything pretty much worked.</p>
 
+      <p>And then after a few days I had an interesting though, what
+      happens if I try making search more social. What if people could
+      see each other's queries and the result that got? Another night
+      of coding later, and here we are, seeing what happens :)</p>
+      
       <h2>The tech</h2>
 
       <p>The search translates any query into a geocode with the Google
@@ -242,6 +247,7 @@
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <div id="fb-root"></div>
   <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  <script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
   <!-- end scripts-->
 
 

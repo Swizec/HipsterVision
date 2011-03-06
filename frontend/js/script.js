@@ -25,6 +25,12 @@ $(document).ready(function () {
     
     mpmetrics.track('Loaded page');
 
+    if (query == '') {
+	user_location(function (location) {
+	    alert(location[0].formatted_address); 
+	});
+    }
+
     if (query != '') {
 	$("#frontpageresult").css({display: 'none'});
 
