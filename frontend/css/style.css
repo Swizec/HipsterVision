@@ -280,9 +280,8 @@ form p.explain {
     margin-left:246px;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     background: rgba(0,0,0, 0.6);
-    padding: 1.5em;
 }
 
 .image .front label.likes .num {
@@ -299,7 +298,7 @@ form p.explain {
 
 .image .front .liek {
     position: absolute;
-    width: 200px;
+    width: 160px;
     top: -50px;
     transition: all ease-out 300ms;
     -webkit-transition: all ease-out 300ms;
@@ -308,6 +307,12 @@ form p.explain {
     -webkit-border-bottom-right-radius: 10px;
     -moz-border-radius-bottomright: 10px;
     border-bottom-right-radius: 10px;
+    background: rgba(0,0,0, 0.6);
+    padding: 5px;
+}
+
+.image .front .likes iframe {
+    top: -2px;
 }
 
 .image .front:hover .liek {
