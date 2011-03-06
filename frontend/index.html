@@ -44,6 +44,11 @@
 <% }else{ %>
     <meta name="description" content="Pretty pictures!">
     <title>We're having new age fun with a vintage feel!</title>
+   <% if (images.length > 0)  {%>
+   <% var img = Math.floor(Math.random()%images.length); %>
+   <meta property="og:image" content="<%=images[img].images.low_resolution.url %>"/>
+  <link rel="image_src" href="<%= images[img].images.low_resolution.url %>" />
+  <% } %>
 <% } %>
 
 </head>
