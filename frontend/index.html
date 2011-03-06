@@ -12,8 +12,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="fb:admins" content="624156314" />
 
-  <title>We're having new age fun with a vintage feel!</title>
-  <meta name="description" content="">
   <meta name="author" content="Swizec">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
@@ -36,7 +34,17 @@
   <% if (special_image) { %>
   <meta property="og:image" content="<%= special_image.images.low_resolution.url %>"/>
   <link rel="image_src" href="<%= special_image.images.low_resolution.url %>" />
-  <% } %>
+  <meta property="og:title" content="<%= special_image.user.username %> is having new age fun with a vintage feel"/>
+    <meta property="og:url" content="http://hipstervision.org/pic/<%= special_image.id %>"/>
+    <meta property="og:site_name" content="HipsterVision"/>
+    <meta property="og:description"
+          content="<%= (special_image.caption) ? special_image.caption.text : '' %>"/>
+      <meta name="description" content="<%= (special_image.caption) ? special_image.caption.text : '' %>">
+    <title><%= special_image.user.username %> is having new age fun with a vintage feel</title>
+<% }else{ %>
+    <meta name="description" content="Pretty pictures!">
+    <title>We're having new age fun with a vintage feel!</title>
+<% } %>
 
 </head>
 
@@ -61,7 +69,7 @@
       </header>
       <div>
 	<% if (special_image) { %>
-	  <script>$(document).ready(function () { mpmetrics.track('From share')});</script>
+	  <script type="text/javascript">$(document).ready(function () { mpmetrics.track('From share')});</script>
 	  <div id="special">
 	    <h2>Your friend found this looking for <a href="/?search=<%= search_query %>">
 		<%= search_query %></a>!</h2>
@@ -107,7 +115,8 @@
 	<% }else{ %>
 	<div id="frontpageresult">
 	<% } %>
-	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
+	  <h2>Last dude searched for <a href="/?search=<%= search_query %>">
+	  <%= search_query %></a> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" 
 		  img_id="<%= images[i].id %>" class="image">
@@ -171,7 +180,7 @@
       </header>     
      <article> 
       <p>HipsterVision.org is mostly the result of a sleepless February
-    night about <time datetime="2011-03-02T4:06Z"></time>. The
+    night <time datetime="2011-03-02T4:06Z"></time>. The
     Instagram API had just come out a few days earlier and I knew I
     wanted to make something with it.</p>
 
@@ -186,6 +195,11 @@
 
       <p>A night of coding later -> everything pretty much worked.</p>
 
+      <p>And then after a few days I had an interesting though, what
+      happens if I try making search more social. What if people could
+      see each other's queries and the result that got? Another night
+      of coding later, and here we are, seeing what happens :)</p>
+      
       <h2>The tech</h2>
 
       <p>The search translates any query into a geocode with the Google
@@ -225,10 +239,10 @@
 
 
   <!-- scripts concatenated and minified via ant build script-->
+  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="/js/plugins.js"></script>
   <script src="/js/jquery.timeago.js"></script>
   <script src="/js/script.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script type='text/javascript'> var mp_protocol = (('https:' == document.location.protocol) ? 'https://' : 'http://'); document.write(unescape('%3Cscript src="' + mp_protocol + 'api.mixpanel.com/site_media/js/api/mixpanel.js" type="text/javascript"%3E%3C/script%3E')); </script> <script type='text/javascript'> try {  var mpmetrics = new MixpanelLib('fdab1c44fc9a6d367f146293680838e2'); } catch(err) { null_fn = function () {}; var mpmetrics = {  track: null_fn,  track_funnel: null_fn,  register: null_fn,  register_once: null_fn, register_funnel: null_fn }; } </script>
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <div id="fb-root"></div>

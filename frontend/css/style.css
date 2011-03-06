@@ -271,7 +271,7 @@ form p.explain {
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
     color: white;
-    width: 306px;
+    width: 100%;
     max-width: 306px;
     word-wrap: break-word;
     text-align: justify;
@@ -283,6 +283,9 @@ form p.explain {
 
 .image .front label.caption {
     bottom: -6em;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-right-radius: 10px;
 }
 
 .image .front label.caption time {
@@ -297,7 +300,7 @@ form p.explain {
     margin-left:120px;
     -webkit-border-bottom-left-radius: 10px;
     -moz-border-radius-bottomleft: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     background: rgba(0,0,0, 0.6);
 }
 
@@ -564,18 +567,35 @@ padding-right: 0.5em;
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
+    header {
+	font-size: 2em;
+    }
 
+    .image .front label.caption {
+	bottom: 0px;
+    }
+
+    .image .front label.likes {
+	top: -10px;
+    }
+
+    form {
+	font-size: 1em;
+	width: 100%;
+    }
+
+    form input[type='text'] {
+	width: 100%;
+    }
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
