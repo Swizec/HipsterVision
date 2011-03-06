@@ -18,8 +18,8 @@ var server = http.createServer(function (req, res) {
 	    res.write(parrot.render(data,
 				    {cache: 0,
 				     sandbox: {images: images,
-					       search_query: search_query,
-					       special_image: special_image}}));
+					       search_query: search_query || '',
+					       special_image: special_image || false}}));
 	    res.end();
 	});
     }
