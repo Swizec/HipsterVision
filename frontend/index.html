@@ -58,9 +58,9 @@
 	<% if (special_image) { %>
 	  <div id="special">
 	    <h2>Your friend found this!</h2>
-            <div id="image-<%= i %>" class="image">
+            <div id="image-special" class="image">
 	       <div class="front">
-		 <img src="<%= special_image.images.low_resolution.url %>" />
+		 <img src="<%= special_image.images.standard_resolution.url %>" />
 		 <label class="likes">
 		    ♥ <span class="num"><%= special_image.likes.count %></span>
 		    <a href="http://twitter.com/share"
@@ -95,7 +95,11 @@
 	  <a href="http://hipstervision.org/?search=!popular" class="popular explain" style="">These pics were popular before anyone liked them ;)</a>
        </form>
 
-	<div id="frontpageresult"  style="<%= (special_image) ? 'display: none': ''%>">
+	<% if (special_image) { %>
+	<div id="frontpageresult"  style="display: none">
+	<% }else{ %>
+	<div id="frontpageresult">
+	<% } %>
 	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" class="image">
