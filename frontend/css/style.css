@@ -564,32 +564,10 @@ padding-right: 0.5em;
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-    header {
-	font-size: 2em;
-    }
-
-    .image .front:hover label.caption {
-	bottom: 0px;
-    }
-
-    .image .front:hover label.likes {
-	top: -10px;
-    }
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-    header {
-	font-size: 2em;
-    }
-
-    .image .front:hover label.caption {
-	bottom: 0px;
-    }
-
-    .image .front:hover label.likes {
-	top: -10px;
-    }
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
@@ -599,11 +577,11 @@ padding-right: 0.5em;
 	font-size: 2em;
     }
 
-    .image .front:hover label.caption {
+    .image .front label.caption {
 	bottom: 0px;
     }
 
-    .image .front:hover label.likes {
+    .image .front label.likes {
 	top: -10px;
     }
 

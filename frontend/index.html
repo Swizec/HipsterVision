@@ -38,8 +38,8 @@
     <meta property="og:url" content="http://hipstervision.org/pic/<%= special_image.id %>"/>
     <meta property="og:site_name" content="HipsterVision"/>
     <meta property="og:description"
-          content="<% (special_image.caption) ? special_image.caption.text : '' %>"/>
-      <meta name="description" content="<% (special_image.caption) ? special_image.caption.text : '' %>">
+          content="<%= (special_image.caption) ? special_image.caption.text : '' %>"/>
+      <meta name="description" content="<%= (special_image.caption) ? special_image.caption.text : '' %>">
     <title><%= special_image.user.username %> is having new age fun with a vintage feel</title>
 <% }else{ %>
     <meta name="description" content="Pretty pictures!">
