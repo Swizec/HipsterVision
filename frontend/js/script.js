@@ -85,6 +85,10 @@ $(document).ready(function () {
     $('.tags a').live('click', function () {
 	mpmetrics.track('Clicked suggestion');
     });
+
+    $('.image iframe').click(function () {
+	alert('jack!');
+    });
 });
 
 function find_pics(query, before) {
