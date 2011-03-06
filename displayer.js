@@ -22,18 +22,20 @@ var server = http.createServer(function (req, res) {
 
     if (req.url.substring(0, 5) == '/pic/') {
 	var id = req.url.split('/')[2];
-	redis.get('HV:image:'+id, function (err, data) {
-	    if (data == null) {
+	redis.get('HV:image:'+id, function (err, image) {
+	    if (image == null) {
 		instagram.media.id(id, function (image, error) {
 		    redis.set('HV:image:'+id, JSON.stringify(image));
 		    redis.expire('HV:imgquery:'+id, 3600);
 
-		    redis.get('HV:imgquery:'+id, function (err, data) {
-			serve([], data || '', image);
+		    redis.get('HV:imgquery:'+id, function (err, query) {
+			serve([], query || '', image);
 		    });
 		});
 	    }else{
-		serve([], '', JSON.parse(data));
+	    	redis.get('HV:imgquery:'+id, function (err, query) {
+                    serve([], query || '', JSON.parse(image));
+                });
 	    }
 	});
     }else{
