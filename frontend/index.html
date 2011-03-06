@@ -14,7 +14,7 @@
 
   <title>We're having new age fun with a vintage feel!</title>
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Swizec">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +32,11 @@
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="/js/libs/modernizr-1.7.min.js"></script>
+
+  <% if (special_image) { %>
+  <meta property="og:image" content="http://hipstervision.org/pic/<% special_image.id %>"/>
+  <link rel="image_src" href="http://hipstervision.org/pic/<% special_image.id %>" />
+  <% } %>
 
 </head>
 
