@@ -8,6 +8,8 @@ var http = require('http'),
 
 
 var server = http.createServer(function (req, res) {
+    var query = querystring.parse(urllib.parse(req.url)['query']);
+
     var serve = function (images, search_query, special_image) {
 	res.writeHead(200);
 	fs.readFile('frontend/index.html', function(err, data) {
@@ -39,18 +41,22 @@ var server = http.createServer(function (req, res) {
 	    }
 	});
     }else{
-	redis.get('HV:last-search', function (err, data) {
-	    var images = [];
-	    var search_query = '';
-
-	    if (data != null) {
-		var data = JSON.parse(data);
-		images = data['result']['images'];
-		search_query = data['query'];
-	    }
-
-	    serve(images, search_query);
-	});
+	if (query['search']) {
+	    serve([], '');
+	}else{
+	    redis.get('HV:last-search', function (err, data) {
+		var images = [];
+		var search_query = '';
+		
+		if (data != null) {
+		    var data = JSON.parse(data);
+		    images = data['result']['images'];
+		    search_query = data['query'];
+		}
+		
+		serve(images, search_query);
+	    });
+	}
     }
 });
 
