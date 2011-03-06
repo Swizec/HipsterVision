@@ -567,32 +567,10 @@ padding-right: 0.5em;
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-    header {
-	font-size: 2em;
-    }
-
-    .image .front:hover label.caption {
-	bottom: 0px;
-    }
-
-    .image .front:hover label.likes {
-	top: -10px;
-    }
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-    header {
-	font-size: 2em;
-    }
-
-    .image .front:hover label.caption {
-	bottom: 0px;
-    }
-
-    .image .front:hover label.likes {
-	top: -10px;
-    }
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
@@ -602,14 +580,22 @@ padding-right: 0.5em;
 	font-size: 2em;
     }
 
-    .image .front:hover label.caption {
+    .image .front label.caption {
 	bottom: 0px;
     }
 
-    .image .front:hover label.likes {
+    .image .front label.likes {
 	top: -10px;
     }
 
+    form {
+	font-size: 1em;
+	width: 100%;
+    }
+
+    form input[type='text'] {
+	width: 100%;
+    }
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
   /* html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
