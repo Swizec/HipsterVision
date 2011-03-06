@@ -70,8 +70,14 @@
 	     <div id="image-<%= i %>" class="image">
 	       <div class="front">
 		 <img src="<%= images[i].images.low_resolution.url %>" />
-		 <fb:like href="http://dev.hipstervision.org/"
-		      layout="button_count" show_faces="false" width="150"></fb:like>
+		 <div class="liek">
+		   <a href="http://twitter.com/share"
+	  class="twitter-share-button"
+	  data-url="http://hipstervision.org/pic/<%= images[i].id %>"
+	  data-text="Found a cool pic on hipstervision \o/" data-count="none">Tweet</a>
+		   <fb:like href="http://hipstervision.org/pic/<%= images[i].id %>"
+		      layout="button_count" show_faces="false" width="100"></fb:like>
+		 </div>
 		 <label class="likes">♥ <span class="num"><%= images[i].likes.count %></span></label>
 		 <label class="caption">
 		   <strong><%= images[i].user.username %></strong>

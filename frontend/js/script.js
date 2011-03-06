@@ -86,8 +86,14 @@ $(document).ready(function () {
 	mpmetrics.track('Clicked suggestion');
     });
 
-    $('.image iframe').click(function () {
-	alert('jack!');
+    FB.Event.subscribe('edge.create', function(response) {
+	alert('Liek!');
+	mpmetrics.track('FB pic like');
+    });
+
+    $(".image .liek a").live('click', function () {
+	alert('tweet!');
+	mpmetrics.track('Tweet pic');
     });
 });
 
