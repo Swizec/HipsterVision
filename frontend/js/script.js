@@ -185,7 +185,7 @@ function display_images(images) {
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
-	$image.find('label.likes a').attr('data-url', 'http://hipstervision.org/pic/'+images[i].id);
+	$image.find('label.likes').append('<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hipstervision.org/pic/'+images[i].id+'" data-text="Found a cool pic on hipstervision :D" data-count="none" data-via="swizec">Tweet</a>');
 	$image.find('label.likes .fblike').attr('href', 'http://hipstervision.org/pic/'+images[i].id);
 
 	var $caption = $image.find('label.caption');
