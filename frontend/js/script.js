@@ -86,6 +86,8 @@ $(document).ready(function () {
 	mpmetrics.track('Clicked suggestion');
     });
 
+    FB.init({appId: '115797901829229', status: true, cookie: true,
+             xfbml: true});
     FB.Event.subscribe('edge.create', function(response) {
 	alert('Liek!');
 	mpmetrics.track('FB pic like');
