@@ -164,7 +164,11 @@ function display_images(images) {
 	    setTimeout(function () { display_image(i+1) }, 50);
         }else{
 	    $.waypoints('refresh');
-	    $("body").append('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
+
+	    _my_script=document.createElement('SCRIPT');
+	    _my_script.type='text/javascript';
+	    _my_script.src='http://platform.twitter.com/widgets.js';
+	    document.getElementsByTagName('head')[0].appendChild(_my_script);
         }
     }
 
