@@ -191,6 +191,8 @@ header a {
 
 #special h2 {
     font-size: 1.5em;
+    margin-bottom: 0.7em;
+    text-align: center;
 }
 
 form {
@@ -297,6 +299,10 @@ form p.explain {
     -moz-border-radius-bottomleft: 10px;
     border-bottom-right-radius: 10px;
     background: rgba(0,0,0, 0.6);
+}
+
+#special .image .front label.likes {
+    margin-left: 420px;
 }
 
 .image .front label.likes .num {
