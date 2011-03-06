@@ -18,7 +18,7 @@ var server = http.createServer(function (req, res) {
 	    res.write(parrot.render(data,
 				    {cache: 0,
 				     sandbox: {images: images,
-					       search_query: search_query || '',
+					       search_query: search_query,
 					       special_image: special_image || false}}));
 	    res.end();
 	});
@@ -38,7 +38,7 @@ var server = http.createServer(function (req, res) {
 		});
 	    }else{
 	    	redis.get('HV:imgquery:'+id, function (err, query) {
-                    serve([], query || '', JSON.parse(image));
+	          serve([], query || '', JSON.parse(image));
                 });
 	    }
 	});
