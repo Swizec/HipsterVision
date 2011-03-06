@@ -1,5 +1,7 @@
 
 var http = require('http'),
+    urllib = require('url'),
+    querystring = require('querystring'),
     fs = require('fs'),
     redis = require('redis').createClient(),
     settings = require('./settings.js'),
