@@ -165,10 +165,10 @@ function display_images(images) {
         }else{
 	    $.waypoints('refresh');
 
-	    _my_script=document.createElement('SCRIPT');
+	    /*_my_script=document.createElement('SCRIPT');
 	    _my_script.type='text/javascript';
 	    _my_script.src='http://platform.twitter.com/widgets.js';
-	    document.getElementsByTagName('head')[0].appendChild(_my_script);
+	    document.getElementsByTagName('head')[0].appendChild(_my_script);*/
         }
     }
 
@@ -199,6 +199,7 @@ function display_images(images) {
 	$caption.append((images[i].caption != null) ? '<br/>'+images[i].caption.text : '');
 
 	FB.XFBML.parse($image.find('label.likes')[0]);
+	make_twitter();
 
 	var $comments = $image.find('.back ul');
 	for (var j = 0; j < images[i].comments.data.length; j++) {
