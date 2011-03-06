@@ -56,8 +56,9 @@
       </header>
       <div>
 	<% if (special_image) { %>
+	  <script>$(document).ready(function () { mpmetrics.track('From share')});</script>
 	  <div id="special">
-	    <h2>Your friend found this!</h2>
+	    <h2>Your friend found this looking for <em><%= search_query %>!</h2>
             <div id="image-special" class="image">
 	       <div class="front">
 		 <img src="<%= special_image.images.standard_resolution.url %>" />

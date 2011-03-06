@@ -26,7 +26,11 @@ var server = http.createServer(function (req, res) {
 	    if (data == null) {
 		instagram.media.id(id, function (image, error) {
 		    redis.set('HV:image:'+id, JSON.stringify(image));
-		    serve([], '', image);
+		    redis.expire('HV:imgquery:'+id, 3600);
+
+		    redis.get('HV:imgquery:'+id, function (err, data) {
+			serve([], data || '', image);
+		    });
 		});
 	    }else{
 		serve([], '', JSON.parse(data));

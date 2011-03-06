@@ -23,6 +23,11 @@ var server = http.createServer(function (req, res) {
 							result: result}));
 	}
 
+	for (var i=0; i<images.length; i++) {
+	    redis.set('HV:imgquery:'+images[i].id, query['orig_query']);
+	    redis.expire('HV:imgquery:'+images[i].id, 3600);
+	}
+
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
 	});
