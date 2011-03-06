@@ -165,6 +165,9 @@ function display_images(images) {
         }else{
 	    $.waypoints('refresh');
 
+	    FB.init({appId: '115797901829229', status: true, cookie: true,
+                      xfbml: true});
+
 	    _my_script=document.createElement('SCRIPT');
 	    _my_script.type='text/javascript';
 	    _my_script.src='http://platform.twitter.com/widgets.js';
