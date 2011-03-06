@@ -55,8 +55,37 @@
         <a href="/">We're having new age fun with a vintage feel!</a>
       </header>
       <div>
+	<% if (special_image) { %>
+	    <h2>Your friend found this!</h2>
+            <div id="image-<%= i %>" class="image">
+	       <div class="front">
+		 <img src="<%= special_image.images.low_resolution.url %>" />
+		 <label class="likes">
+		    ♥ <span class="num"><%= special_image.likes.count %></span>
+		    <a href="http://twitter.com/share"
+	  class="twitter-share-button"
+	  data-url="http://hipstervision.org/pic/<%= special_image.id %>"
+	  data-text="Found a cool pic on hipstervision :D"
+	  data-count="none" data-via="swizec">Tweet</a>
+		   <fb:like href="http://hipstervision.org/pic/<%= special_image.id %>"
+		      layout="button_count" show_faces="false" width="100"></fb:like>
+		 </label>
+		 <label class="caption">
+		   <strong><%= special_image.user.username %></strong>
+		   <br />
+		   <%= (special_image.caption) ? special_image.caption.text : '' %>
+		 </label>
+	       </div>
+	       <div class="back">
+	       </div>
+	    </div>
+	<% } %>
         <form action="" type="GET" id="search">
-          <label>Vintage feel in: </label>
+	  <% if (special_image) { %>
+          <label>Try a search: </label>
+	  <% }else{ %>
+   	  <label>Vintage feel in: </label>
+	  <% } %>
           <input type="text" name="search" placeholder="Enter a place, like San Francisco" />
 	  <p id="tips">Enter a location and find pretty pics about it (that hipsters took with instagram)!<br />To search for words use a hashbang, like <strong>#snow</strong></p>
           <input type="submit" value="Search ironically!" />
@@ -64,7 +93,7 @@
 	  <a href="http://hipstervision.org/?search=!popular" class="popular explain" style="">These pics were popular before anyone liked them ;)</a>
        </form>
 
-	<div id="frontpageresult">
+	<div id="frontpageresult <%= (special_image) ? 'hidden': ''%>">
 	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" class="image">

@@ -8,13 +8,14 @@ var http = require('http'),
 
 
 var server = http.createServer(function (req, res) {
-    var serve = function (images, search_query) {
+    var serve = function (images, search_query, special_image) {
 	res.writeHead(200);
 	fs.readFile('frontend/index.html', function(err, data) {
 	    res.write(parrot.render(data,
 				    {cache: 0,
 				     sandbox: {images: images,
-					       search_query: search_query}}));
+					       search_query: search_query,
+					       special_image: special_image}}));
 	    res.end();
 	});
     }
@@ -25,10 +26,10 @@ var server = http.createServer(function (req, res) {
 	    if (data == null) {
 		instagram.media.id(id, function (image, error) {
 		    redis.set('HV:image:'+id, JSON.stringify(image));
-		    serve([image], '');
+		    serve([], '', image);
 		});
 	    }else{
-		serve([JSON.parse(data)], '');
+		serve([], '', JSON.parse(data));
 	    }
 	});
     }else{
