@@ -25,22 +25,6 @@ $(document).ready(function () {
     
     mpmetrics.track('Loaded page');
 
-    if (query == '') {
-	user_location(function (location) {
-	    var geocoder = new google.maps.Geocoder();
-
-	    geocoder.geocode({location: location},
-			     function (result, status) {
-				 if (status == 'OK') {
-				     $("#search input[type='text']").val(result[0].formatted_address);
-				 }else{
-				     error("Google won't talk to us :/");
-				 }
-			     });
-    }
-	});
-    }
-
     if (query != '') {
 	$("#frontpageresult").css({display: 'none'});
 
