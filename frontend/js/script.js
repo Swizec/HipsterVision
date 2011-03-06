@@ -49,15 +49,10 @@ $(document).ready(function () {
     });
 
     $(".image").live('click', function () {
-        var $this = $(this);
-	if ($this.hasClass('flip')) {
-	    $this.removeClass('flip');
-	}else{
-	    mpmetrics.track('Clicked image', {
-		'position': $this.attr('id').split('-')[1]
-	    });
-   	    $(this).addClass('flip');
-	}
+	mpmetrics.track('Clicked image', {
+	    'position': $(this).attr('id').split('-')[1]
+	});
+	window.location.href = '/pic/'+$(this).attr('img_id');
     });
     
     $('time').timeago();
@@ -164,11 +159,6 @@ function display_images(images) {
 	    setTimeout(function () { display_image(i+1) }, 50);
         }else{
 	    $.waypoints('refresh');
-
-	    /*_my_script=document.createElement('SCRIPT');
-	    _my_script.type='text/javascript';
-	    _my_script.src='http://platform.twitter.com/widgets.js';
-	    document.getElementsByTagName('head')[0].appendChild(_my_script);*/
         }
     }
 
@@ -185,8 +175,11 @@ function display_images(images) {
 
 	pagination_data.timestamp = images[i].created_time;
 
-	var $image = $proto.clone().attr('class', 'image').attr('id', 'image-'+(image_id+i));
-	$image.appendTo($target);
+	var $image = $proto.clone()
+	    .attr('class', 'image')
+	    .attr('id', 'image-'+(image_id+i))
+	    .attr('img_id', images[i].id)
+	    .appendTo($target);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
