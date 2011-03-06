@@ -12,8 +12,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="fb:admins" content="624156314" />
 
-  <title>We're having new age fun with a vintage feel!</title>
-  <meta name="description" content="">
   <meta name="author" content="Swizec">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
@@ -36,7 +34,17 @@
   <% if (special_image) { %>
   <meta property="og:image" content="<%= special_image.images.low_resolution.url %>"/>
   <link rel="image_src" href="<%= special_image.images.low_resolution.url %>" />
-  <% } %>
+  <meta property="og:title" content="<%= special_image.user.username %> is having new age fun with a vintage feel"/>
+    <meta property="og:url" content="http://hipstervision.org/pic/<%= special_image.id %>"/>
+    <meta property="og:site_name" content="HipsterVision"/>
+    <meta property="og:description"
+          content="<% (special_image.caption) ? special_image.caption.text : '' %>"/>
+      <meta name="description" content="<% (special_image.caption) ? special_image.caption.text : '' %>">
+    <title><%= special_image.user.username %> is having new age fun with a vintage feel</title>
+<% }else{ %>
+    <meta name="description" content="Pretty pictures!">
+    <title>We're having new age fun with a vintage feel!</title>
+<% } %>
 
 </head>
 

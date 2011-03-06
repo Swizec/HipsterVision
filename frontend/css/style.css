@@ -271,7 +271,7 @@ form p.explain {
     padding: 1.5em;
     background: rgba(0,0,0, 0.6);
     color: white;
-    width: 306px;
+    width: 100%;
     max-width: 306px;
     word-wrap: break-word;
     text-align: justify;
@@ -564,17 +564,48 @@ padding-right: 0.5em;
 
 @media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
+    header {
+	font-size: 2em;
+    }
 
+    .image .front:hover label.caption {
+	bottom: 0px;
+    }
+
+    .image .front:hover label.likes {
+	top: -10px;
+    }
 }
 
 @media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
+    header {
+	font-size: 2em;
+    }
 
+    .image .front:hover label.caption {
+	bottom: 0px;
+    }
+
+    .image .front:hover label.likes {
+	top: -10px;
+    }
 }
 
 /* Grade-A Mobile Browsers (Opera Mobile, Mobile Safari, Android Chrome)
    consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
+    header {
+	font-size: 2em;
+    }
+
+    .image .front:hover label.caption {
+	bottom: 0px;
+    }
+
+    .image .front:hover label.likes {
+	top: -10px;
+    }
 
 
   /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you: j.mp/textsizeadjust */
