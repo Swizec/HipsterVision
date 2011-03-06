@@ -109,9 +109,10 @@ function find_pics(query, before) {
     }
 
     if (query == '') { return 0; };
-query = decodeURIComponent(query);
+    query = decodeURIComponent(query);
     if (query == '!popular') {
-	do_search(query);
+	$("#search input[type='text']").val(query);
+ 	do_search(query);
     }else if (query.charAt(0) == '#') {
 	$("#search input[type='text']").val(query);
 	do_search(query);
