@@ -25,7 +25,7 @@ var server = http.createServer(function (req, res) {
 
 	for (var i=0; i<images.length; i++) {
 	    redis.set('HV:imgquery:'+images[i].id, query['orig_query']);
-	    redis.expire('HV:imgquery:'+images[i].id, 3600);
+	    redis.expire('HV:imgquery:'+images[i].id, 7200);
 	}
 
 	res.writeHead(200, {
