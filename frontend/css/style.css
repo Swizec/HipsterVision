@@ -183,7 +183,7 @@ header a {
     text-decoration: inherit;
 }
 
-form {
+form, #special {
     text-align: center;
     width: 500px;
     margin: 0 auto;
