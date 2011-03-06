@@ -27,7 +27,17 @@ $(document).ready(function () {
 
     if (query == '') {
 	user_location(function (location) {
-	    alert(location[0].formatted_address); 
+	    var geocoder = new google.maps.Geocoder();
+
+	    geocoder.geocode({location: location},
+			     function (result, status) {
+				 if (status == 'OK') {
+				     $("#search input[type='text']").val(result[0].formatted_address);
+				 }else{
+				     error("Google won't talk to us :/");
+				 }
+			     });
+    }
 	});
     }
 
