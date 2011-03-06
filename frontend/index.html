@@ -95,7 +95,7 @@
 	  <a href="http://hipstervision.org/?search=!popular" class="popular explain" style="">These pics were popular before anyone liked them ;)</a>
        </form>
 
-	<div id="frontpageresult <%= (special_image) ? 'hidden': ''%>">
+	<div id="frontpageresult"  style="<%= (special_image) ? 'display: none': ''%>">
 	  <h2>Last dude searched for <em><%= search_query %></em> and got:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" class="image">
