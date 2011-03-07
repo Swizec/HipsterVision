@@ -19,6 +19,7 @@ var server = http.createServer(function (req, res) {
 				    {cache: 0,
 				     sandbox: {images: images,
 					       search_query: search_query,
+					       search_query_url: search_query.replace('#', '%23'),
 					       special_image: special_image || false}}));
 	    res.end();
 	});
