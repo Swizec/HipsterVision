@@ -36,6 +36,8 @@ var server = http.createServer(function (req, res) {
 			redis.expire('HV:image:'+id, 3600); // 1h
 			callback(image);
 		    });
+		}else{
+		    callback(image);
 		}
 	    });
 	}
