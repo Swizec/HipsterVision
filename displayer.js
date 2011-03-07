@@ -27,21 +27,25 @@ var server = http.createServer(function (req, res) {
 
     if (req.url.substring(0, 5) == '/pic/') {
 	var id = req.url.split('/')[2];
-	redis.get('HV:image:'+id, function (err, image) {
-	    if (image == null) {
-		instagram.media.id(id, function (image, error) {
-		    redis.set('HV:image:'+id, JSON.stringify(image));
-		    redis.expire('HV:imgquery:'+id, 3600);
-
-		    redis.get('HV:imgquery:'+id, function (err, query) {
-			serve([], query || '', image);
+	// caching mechanism
+	var get_image = function (callback) {
+	    redis.get('HV:image:'+id, function (err, image) {
+		if (image == null) {
+		    instagram.media.id(id, function (image, error) {
+			redis.set('HV:image:'+id, JSON.stringify(image));
+			redis.expire('HV:image:'+id, 3600); // 1h
+			callback(image);
 		    });
-		});
-	    }else{
-	    	redis.get('HV:imgquery:'+id, function (err, query) {
-	          serve([], query || '', JSON.parse(image));
-                });
-	    }
+		}
+	    });
+	}
+
+	get_image(function (image) {
+	    redis.expire('HV:imgquery:'+id, 18000); // 5 more hours
+	    redis.get('HV:imgquery:'+id, function (err, query) {
+		query = query || '';
+		serve([], query, image);
+	    });
 	});
     }else{
 	if (query['search']) {
