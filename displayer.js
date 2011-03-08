@@ -13,6 +13,7 @@ var server = http.createServer(function (req, res) {
     var query = querystring.parse(urllib.parse(req.url)['query']);
 
     var serve = function (images, search_query, special_image) {
+	console.log('serve');
 	res.writeHead(200);
 	fs.readFile('frontend/index.html', function(err, data) {
 	    res.write(parrot.render(data,
@@ -27,21 +28,29 @@ var server = http.createServer(function (req, res) {
 
     if (req.url.substring(0, 5) == '/pic/') {
 	var id = req.url.split('/')[2];
-	redis.get('HV:image:'+id, function (err, image) {
-	    if (image == null) {
-		instagram.media.id(id, function (image, error) {
-		    redis.set('HV:image:'+id, JSON.stringify(image));
-		    redis.expire('HV:imgquery:'+id, 3600);
-
-		    redis.get('HV:imgquery:'+id, function (err, query) {
-			serve([], query || '', image);
+	// caching mechanism
+	var get_image = function (callback) {
+	    redis.get('HV:image:'+id, function (err, image) {
+		if (image == null) {
+		    instagram.media.id(id, function (image, error) {
+			redis.set('HV:image:'+id, JSON.stringify(image));
+			redis.expire('HV:image:'+id, 3600); // 1h
+			callback(image);
 		    });
-		});
-	    }else{
-	    	redis.get('HV:imgquery:'+id, function (err, query) {
-	          serve([], query || '', JSON.parse(image));
-                });
-	    }
+		}else{
+		    callback(JSON.parse(image));
+		}
+	    });
+	}
+
+	get_image(function (image) {
+	    redis.expire('HV:imgquery:'+id, 18000); // 5 more hours
+	    redis.get('HV:imgquery:'+id, function (err, query) {
+		query = query || '';
+		console.log('HV:imgquery:'+id);
+		console.log("query fresh out of redis: "+query);
+		serve([], query, image);
+	    });
 	});
     }else{
 	if (query['search']) {
