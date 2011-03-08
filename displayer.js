@@ -13,6 +13,7 @@ var server = http.createServer(function (req, res) {
     var query = querystring.parse(urllib.parse(req.url)['query']);
 
     var serve = function (images, search_query, special_image) {
+	console.log('serve');
 	res.writeHead(200);
 	fs.readFile('frontend/index.html', function(err, data) {
 	    res.write(parrot.render(data,
