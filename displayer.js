@@ -38,7 +38,7 @@ var server = http.createServer(function (req, res) {
 			callback(image);
 		    });
 		}else{
-		    callback(image);
+		    callback(JSON.parse(image));
 		}
 	    });
 	}
@@ -47,6 +47,8 @@ var server = http.createServer(function (req, res) {
 	    redis.expire('HV:imgquery:'+id, 18000); // 5 more hours
 	    redis.get('HV:imgquery:'+id, function (err, query) {
 		query = query || '';
+		console.log('HV:imgquery:'+id);
+		console.log("query fresh out of redis: "+query);
 		serve([], query, image);
 	    });
 	});
