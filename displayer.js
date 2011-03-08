@@ -44,8 +44,6 @@ var server = http.createServer(function (req, res) {
 	get_image(function (image) {
 	    redis.get('HV:imgquery:'+id, function (err, search_query) {
 		search_query = search_query || '';
-		console.log('HV:imgquery:'+id);
-		console.log("query fresh out of redis: "+search_query);
 		serve([], search_query, image);
 		redis.expire('HV:imgquery:'+id, 18000); // 5 more hours
 	    });
