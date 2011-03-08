@@ -13,8 +13,7 @@ var server = http.createServer(function (req, res) {
     var query = querystring.parse(urllib.parse(req.url)['query']);
 
     var serve = function (images, search_query, special_image) {
-	console.log('serve');
-	res.writeHead(200);
+	res.writeHead(200, {'Content-Type': 'text/html'});
 	fs.readFile('frontend/index.html', function(err, data) {
 	    res.write(parrot.render(data,
 				    {cache: 0,
@@ -34,8 +33,7 @@ var server = http.createServer(function (req, res) {
 		if (image == null) {
 		    instagram.media.id(id, function (image, error) {
 			redis.set('HV:image:'+id, JSON.stringify(image));
-			redis.expire('HV:image:'+id, 3600); // 1h
-			callback(image);
+				callback(image);
 		    });
 		}else{
 		    callback(JSON.parse(image));

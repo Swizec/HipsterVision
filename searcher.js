@@ -18,7 +18,7 @@ var server = http.createServer(function (req, res) {
 	    var result = {images: images};
 	}
 	
-	if (!query['before']) {
+	if (!query['before'] && images.length > 0) {
 	    redis.set('HV:last-search', JSON.stringify({query: query['orig_query'],
 							result: result}));
 	}
