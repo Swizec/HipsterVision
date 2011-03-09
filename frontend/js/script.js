@@ -91,6 +91,10 @@ $(document).ready(function () {
 	alert('tweet!');
 	mpmetrics.track('Tweet pic');
     });
+
+    $(".last_search_ref").click(function() {
+	mpmetrics.track("Last search ref");
+    });
 });
 
 function find_pics(query, before) {
