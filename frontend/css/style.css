@@ -521,12 +521,17 @@ margin-bottom: -6px;
 }
 
 .tags {
-display: block;
-font-size: 0.8em;
+    display: block;
+    font-size: 0.8em;
 }
 
 .tags a {
-padding-right: 0.5em;
+    padding-right: 0.5em;
+}
+
+h2.last_search {
+    margin: 0.6em;
+    font-size: 1.5em;
 }
 
 /**
