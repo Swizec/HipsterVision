@@ -24,8 +24,11 @@ $(document).ready(function () {
     var query = getQuerystring('search', '');
     
     if (query == '') {
-	alert(window.location);
-	mpmetrics.track('Loaded page');
+	if (window.location.indexOf('/pic/') > -1) {
+	    mpmetrics.track('Pic page');
+	}else{
+	    mpmetrics.track('Frontpage');
+	}
     }
 
     if (query != '') {
