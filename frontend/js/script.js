@@ -34,10 +34,6 @@ $(document).ready(function () {
     if (query != '') {
 	$("#frontpageresult").css({display: 'none'});
 
-	mpmetrics.track('Search', {
-	    'query': $('form input[type="text"]').val()
-	});
-
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
 	    .waypoint(infinite_scroll, 
@@ -69,6 +65,15 @@ $(document).ready(function () {
 
     $('.popular').click(function (event) {
 	mpmetrics.track('Popular');
+    });
+
+    $('form').submit(function (event) {
+	event.preventDefault();
+	mpmetrics.track('Search', {
+	    'query': $('form input[type="text"]').val()
+	}, function () {
+	    window.location = '/?search='+encodeURIComponent($('form input[type="text"]').val());
+	});
     });
 
     $('form input[type="text"]').focus(function () {
