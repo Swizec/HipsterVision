@@ -76,7 +76,7 @@
 	<% if (special_image) { %>
 	  <script type="text/javascript">$(document).ready(function () { mpmetrics.track('From share')});</script>
 	  <div id="special">
-	    <h2>Your friend found this looking for <a href="/?search=<%= search_query_url %>">
+	    <h2>Your friend found this looking for <a href="/?search=<%= search_query_url %>" class="last_search_ref">
 		<%= search_query %></a>!</h2>
             <div id="image-special" class="image" img_id="<%= special_image.id %>">
 	       <div class="front">
@@ -104,9 +104,9 @@
 	<% } %>
         <form action="" type="GET" id="search">
 	  <% if (special_image) { %>
-          <label>Find cool pics like this: </label>
+          <label>Find more vintagey pics: </label>
 	  <% }else{ %>
-   	  <label>Vintage feel in: </label>
+   	  <label>Find vintagey pics: </label>
 	  <% } %>
           <input type="text" name="search" placeholder="Enter a place, like San Francisco" />
 	  <p id="tips">Enter a location and find pretty pics about it (that hipsters took with instagram)!<br />To search for words use a hashbang, like <strong>#snow</strong></p>
@@ -120,8 +120,8 @@
 	<% }else{ %>
 	<div id="frontpageresult">
 	<% } %>
-	  <h2>Last dude searched for <a href="/?search=<%= search_query_url %>">
-	  <%= search_query %></a> and got:</h2>
+	  <h2 class="last_search">Last dude searched for <a href="/?search=<%= search_query_url %>" class="last_search_ref">
+	  <%= search_query %></a> and got these:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
 	     <div id="image-<%= i %>" 
 		  img_id="<%= images[i].id %>" class="image">
