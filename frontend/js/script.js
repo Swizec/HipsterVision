@@ -24,7 +24,7 @@ $(document).ready(function () {
     var query = getQuerystring('search', '');
     
     if (query == '') {
-	if (window.location.indexOf('/pic/') > -1) {
+	if (window.location.toString().indexOf('/pic/') > -1) {
 	    mpmetrics.track('Pic page');
 	}else{
 	    mpmetrics.track('Frontpage');
