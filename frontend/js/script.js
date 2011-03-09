@@ -24,16 +24,15 @@ $(document).ready(function () {
     var query = getQuerystring('search', '');
     
     if (query == '') {
-	alert(window.location);
-	mpmetrics.track('Loaded page');
+	if (window.location.toString().indexOf('/pic/') > -1) {
+	    mpmetrics.track('Pic page');
+	}else{
+	    mpmetrics.track('Frontpage');
+	}
     }
 
     if (query != '') {
 	$("#frontpageresult").css({display: 'none'});
-
-	mpmetrics.track('Search', {
-	    'query': $('form input[type="text"]').val()
-	});
 
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
@@ -66,6 +65,15 @@ $(document).ready(function () {
 
     $('.popular').click(function (event) {
 	mpmetrics.track('Popular');
+    });
+
+    $('form').submit(function (event) {
+	event.preventDefault();
+	mpmetrics.track('Search', {
+	    'query': $('form input[type="text"]').val()
+	}, function () {
+	    window.location = '/?search='+encodeURIComponent($('form input[type="text"]').val());
+	});
     });
 
     $('form input[type="text"]').focus(function () {
