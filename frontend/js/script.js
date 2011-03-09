@@ -64,7 +64,11 @@ $(document).ready(function () {
     $('time').timeago();
 
     $('.popular').click(function (event) {
-	mpmetrics.track('Popular');
+	event.preventDefault();
+	var url = $(this).attr('href');
+	mpmetrics.track('Popular', {}, function () {
+	    window.location = url;
+	});
     });
 
     $('form').submit(function (event) {
@@ -86,8 +90,12 @@ $(document).ready(function () {
 	$("#tips").css({display: 'none'});
     });
 
-    $('.tags a').live('click', function () {
-	mpmetrics.track('Clicked suggestion');
+    $('.tags a').live('click', function (event) {
+	event.preventDefault();
+	var url = $(this).attr('href');
+	mpmetrics.track('Clicked suggestion', {}, function () {
+	    window.location = url;
+	});
     });
 
     FB.init({appId: '115797901829229', status: true, cookie: true,
@@ -97,12 +105,15 @@ $(document).ready(function () {
     });
 
     $(".image .liek a").live('click', function () {
-	alert('tweet!');
 	mpmetrics.track('Tweet pic');
     });
 
-    $(".last_search_ref").click(function() {
-	mpmetrics.track("Last search ref");
+    $(".last_search_ref").click(function(event) {
+	event.preventDefault();
+	var url = $(this).attr('href');
+	mpmetrics.track("Last search ref", {}, function () {
+	    window.location = url;
+	});
     });
 });
 
