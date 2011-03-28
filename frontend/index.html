@@ -123,10 +123,11 @@
 	  <h2 class="last_search">Last dude searched for <a href="/?search=<%= search_query_url %>" class="last_search_ref">
 	  <%= search_query %></a> and got these:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
-	     <div id="image-<%= i %>" 
-		  img_id="<%= images[i].id %>" class="image">
+	     <div id="image-<%= i %>">
 	       <div class="front">
-		 <img src="<%= images[i].images.low_resolution.url %>" />
+		 <a href="/pic/<%= images[i].id %>" img_id="<%= images[i].id %>" class="image">
+		    <img src="<%= images[i].images.low_resolution.url %>" />
+		 </a>
 		 <label class="likes">
 		    ♥ <span class="num"><%= images[i].likes.count %></span>
 		    <a href="http://twitter.com/share"

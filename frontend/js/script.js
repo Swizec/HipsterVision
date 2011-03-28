@@ -55,11 +55,13 @@ $(document).ready(function () {
 	$(".image").css({display: "inline-block"});
     });
 
-    $(".image").live('click', function () {
+    $(".image").live('click', function (event) {
+	event.preventDefault();
 	mpmetrics.track('Clicked image', {
 	    'position': $(this).attr('id').split('-')[1]
+	}, function () {
+	    window.location.href = '/pic/'+$(this).attr('img_id');
 	});
-	window.location.href = '/pic/'+$(this).attr('img_id');
     });
     
     $('time').timeago();
