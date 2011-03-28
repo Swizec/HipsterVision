@@ -46,20 +46,25 @@ $(document).ready(function () {
 
     $(".about").toggle(function () {
 	$("#container").addClass('flip');
-	$(".image").css({display: "none"});
+	$("div.image").css({display: "none"});
 
 	mpmetrics.track('Clicked about');
 
     }, function () {
 	$("#container").removeClass('flip');
-	$(".image").css({display: "inline-block"});
+	$("div.image").css({display: "inline-block"});
     });
 
-    $(".image").live('click', function () {
+    $("a.image").live('click', function (event) {
+	var $this = $(this);
+	event.preventDefault();
+
 	mpmetrics.track('Clicked image', {
-	    'position': $(this).attr('id').split('-')[1]
+	    'position': $this.attr('id').split('-')[1]
+	}, function () {
+	alert("measured");	  
+ window.location.href = '/pic/'+$this.attr('img_id');
 	});
-	window.location.href = '/pic/'+$(this).attr('img_id');
     });
     
     $('time').timeago();
