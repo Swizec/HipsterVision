@@ -56,11 +56,14 @@ $(document).ready(function () {
     });
 
     $("a.image").live('click', function (event) {
+	var $this = $(this);
 	event.preventDefault();
+
 	mpmetrics.track('Clicked image', {
-	    'position': $(this).attr('id').split('-')[1]
+	    'position': $this.attr('id').split('-')[1]
 	}, function () {
-	    window.location.href = '/pic/'+$(this).attr('img_id');
+	alert("measured");	  
+ window.location.href = '/pic/'+$this.attr('img_id');
 	});
     });
     
