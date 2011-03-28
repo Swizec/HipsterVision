@@ -32,6 +32,7 @@ $(document).ready(function () {
     }
 
     if (query != '') {
+	mpmetrics.track('Search page');
 	$("#frontpageresult").css({display: 'none'});
 
 	$("#search").addClass('small');

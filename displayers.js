@@ -12,7 +12,7 @@ var start = function () {
 	});
     }
 
-    for (var port = 8114; port < 8123; port++) {
+    for (var port = 8114; port < 8117; port++) {
 	start_worker(port);
     }
 }
