@@ -126,8 +126,10 @@ $(document).ready(function () {
 	event.preventDefault();
 
 	now.subscribe('swizec', function () {
-	    alert("called back");
+		alert("called back!");
 	});
+	
+
     });
 });
 

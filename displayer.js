@@ -72,9 +72,11 @@ var port = process.argv[2];
 server.listen(port, '127.0.0.1');
 
 
-var everyone = require('now').initialize(server);
+var everyone = require('now').initialize(server, {host: 'dev.hipstervision.org', port: 80});
 
-everyone.subscribe = function (name, callback) {
+everyone.now.msg = "Hello world!";
+
+everyone.now.subscribe = function (name, callback) {
     console.log(name);
     callback();
 }
