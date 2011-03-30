@@ -70,3 +70,11 @@ var server = http.createServer(function (req, res) {
 
 var port = process.argv[2];
 server.listen(port, '127.0.0.1');
+
+
+var everyone = require('now').initialize(server);
+
+everyone.subscribe = function (name, callback) {
+    console.log(name);
+    callback();
+}

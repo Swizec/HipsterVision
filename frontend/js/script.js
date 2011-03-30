@@ -121,6 +121,14 @@ $(document).ready(function () {
 	    window.location = url;
 	});
     });
+
+    $(".subscribe").click(function (event) {
+	event.preventDefault();
+
+	now.subscribe('swizec', function () {
+	    alert("called back");
+	});
+    });
 });
 
 function find_pics(query, before) {
