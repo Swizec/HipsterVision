@@ -125,11 +125,23 @@ $(document).ready(function () {
     $(".subscribe").click(function (event) {
 	event.preventDefault();
 
-	now.subscribe('swizec', function () {
-		alert("called back!");
-	});
+	var txt = 'Enter your twitter nick:<br /><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" />';
 	
+	var subscribe = function (v,m,f){
+	    if(v != undefined) {
+		now.subscribe(f.nick);
+	    }
+	}
 
+	$.prompt(txt,{
+	    callback: subscribe,
+	    buttons: { Subscribe: 'Subscribe' }
+	});
+
+
+	//now.subscribe('swizec', function () {
+	//	alert("called back!");
+	//});
     });
 });
 
