@@ -76,8 +76,8 @@ var everyone = require('now').initialize(server, settings.now_opts);
 
 everyone.now.msg = "Hello world!";
 
-everyone.now.subscribe = function (name, query, callback) {
-    console.log(name);
-    console.log(query);
+everyone.now.subscribe = function (user, query, label, callback) {
+    redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user,
+							 'label': label}));
     callback();
 }
