@@ -79,5 +79,6 @@ everyone.now.msg = "Hello world!";
 everyone.now.subscribe = function (user, query, label, callback) {
     redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user,
 							 'label': label}));
+    redis.rpush('HV:subscriptions', query);
     callback();
 }
