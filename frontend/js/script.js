@@ -132,7 +132,7 @@ $(document).ready(function () {
 	var subscribe = function (v,m,f){
 	    if(v != undefined) {
 		now.subscribe(f.nick, actual_search, getQuerystring('search', ''), function () {
-		    $.prompt('This will be awesome!', {prefix: 'jqismooth'});
+		    $.prompt('You will love it '+f.nick+'!', {prefix: 'jqismooth'});
 		});
 	    }
 	}
