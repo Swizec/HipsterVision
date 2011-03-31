@@ -76,7 +76,8 @@ var everyone = require('now').initialize(server, settings.now_opts);
 
 everyone.now.msg = "Hello world!";
 
-everyone.now.subscribe = function (name, callback) {
+everyone.now.subscribe = function (name, query, callback) {
     console.log(name);
+    console.log(query);
     callback();
 }
