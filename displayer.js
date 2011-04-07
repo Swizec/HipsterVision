@@ -77,11 +77,9 @@ everyone.now.subscribe = function (user, query, label, callback) {
     redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user.replace('@', ''),
 							 'label': decodeURIComponent(label)}));
     redis.zscore('HV:subscriptions', query, function (err, score) {
-	console.log(score);
 	if (score === null) {
 	        redis.zcard('HV:subscriptions', function (err, cardinality) {
-		    console.log(cardinality);
-		    redis.zadd('HV:subscriptions', query, float(cardinality));
+		    redis.zadd('HV:subscriptions', cardinality, query);
 		});
 	}
     });
