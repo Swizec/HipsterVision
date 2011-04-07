@@ -79,9 +79,9 @@ everyone.now.subscribe = function (user, query, label, callback) {
     redis.zscore('HV:subscriptions', query, function (err, score) {
 	console.log(score);
 	if (score === null) {
-	        redis.zcount('HV:subscriptions', '-inf', '+inf', function (err, count) {
-		    console.log(count);
-		    redis.zadd('HV:subscriptions', query, count);
+	        redis.zcard('HV:subscriptions', function (err, cardinality) {
+		    console.log(cardinality);
+		    redis.zadd('HV:subscriptions', query, float(cardinality));
 		});
 	}
     });
