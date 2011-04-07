@@ -142,9 +142,9 @@ $(document).ready(function () {
 	    buttons: { Subscribe: 'Subscribe' },
 	    prefix: 'jqismooth',
 	    loaded: function () {
-		$('div.jquismooth form').submit(function (event) {
+		$('#jqismooth form').submit(function (event) {
 		    event.preventDefault();
-		    $('div.jquismooth button').click();
+		    $('#jqismooth_state0_buttonSubscribe').click();
 		});
 	    }
 	});
