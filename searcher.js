@@ -4,6 +4,7 @@ var http = require('http'),
     urllib = require('url'),
     settings = require('./settings.js'),
     redis = require('redis').createClient(),
+    async = require('async'),
     instagram = require('instagram').createClient(settings.client_id,
 						  settings.client_secret);
 
@@ -23,11 +24,13 @@ var server = http.createServer(function (req, res) {
 							result: result}));
 	}
 
-	for (var i=0; i<images.length; i++) {
-	    redis.set('HV:imgquery:'+images[i].id, query['orig_query'], function (err) {
-		redis.expire('HV:imgquery:'+images[i].id, 18000); // 5 hours
-	    });
-	}
+	async.forEach(images, 
+		      function (image, callback) {
+			  redis.set('HV:imgquery:'+image.id, query['orig_query'], function (err) {
+			      redis.expire('HV:imgquery:'+image.id, 18000); // 5 hours
+			  });
+		      },
+		      function (err) {});
 
 	res.writeHead(200, {
 	    'Content-Type': 'application/json'
