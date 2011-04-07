@@ -71,13 +71,10 @@ var server = http.createServer(function (req, res) {
 var port = process.argv[2];
 server.listen(port, '127.0.0.1');
 
-
 var everyone = require('now').initialize(server, settings.now_opts);
 
-everyone.now.msg = "Hello world!";
-
 everyone.now.subscribe = function (user, query, label, callback) {
-    redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user,
+    redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user.replace('@', ''),
 							 'label': label}));
     redis.sadd('HV:subscriptions', query);
     callback();
