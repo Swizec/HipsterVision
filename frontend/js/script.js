@@ -127,7 +127,7 @@ $(document).ready(function () {
     $("a.subscribe").click(function (event) {
 	event.preventDefault();
 
-	var txt = 'Enter your twitter nick:<br /><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" />';
+	var txt = 'Enter your twitter nick:<br /><form><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" /></form>';
 	
 	var subscribe = function (v,m,f){
 	    if(v != undefined) {
@@ -141,6 +141,12 @@ $(document).ready(function () {
 	    callback: subscribe,
 	    buttons: { Subscribe: 'Subscribe' },
 	    prefix: 'jqismooth',
+	    loaded: function () {
+		$('div.jquismooth form').submit(function (event) {
+		    event.preventDefault();
+		    $('div.jquismooth button').click();
+		});
+	    }
 	});
     });
 });

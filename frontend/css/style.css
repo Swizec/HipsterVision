@@ -548,7 +548,7 @@ div.jqismooth button{ padding: 3px 10px; margin: 0 10px; background-color: #2F60
 div.jqismooth button:hover{ background-color: #728A8C; }
 div.jqismooth button.jqismoothdefaultbutton{ background-color: #BF5E26; }
 .jqismoothwarning .jqismooth .jqismoothbuttons{ background-color: #BF5E26; }
-div.jqismooth input { font-size: 1.5em; padding: 3px; line-height: 2em; }
+div.jqismooth input { font-size: 1.5em; padding: 3px; width: 8em }
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
