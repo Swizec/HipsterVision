@@ -76,6 +76,14 @@ var everyone = require('now').initialize(server, settings.now_opts);
 everyone.now.subscribe = function (user, query, label, callback) {
     redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user.replace('@', ''),
 							 'label': decodeURIComponent(label)}));
-    redis.sadd('HV:subscriptions', query);
+    redis.zscore('HV:subscriptions', query, function (err, score) {
+	console.log(score);
+	if (score === null) {
+	        redis.zcount('HV:subscriptions', '-inf', '+inf', function (err, count) {
+		    console.log(count);
+		    redis.zadd('HV:subscriptions', query, count);
+		});
+	}
+    });
     callback();
 }
