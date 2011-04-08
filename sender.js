@@ -14,7 +14,9 @@ var twit = new twitter(require('./settings').twitter);
 damon.start();
 
 var poll = function (subscription) {
-    
+    // do search
+    // check against old result
+    // send tweets
 }
 
 var rescore = function (callback) {
