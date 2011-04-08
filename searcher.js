@@ -6,7 +6,8 @@ var http = require('http'),
     redis = require('redis').createClient(),
     async = require('async'),
     instagram = require('instagram').createClient(settings.client_id,
-						  settings.client_secret);
+						  settings.client_secret),
+    lib = require('./lib.js');
 
 
 var server = http.createServer(function (req, res) {
@@ -40,38 +41,11 @@ var server = http.createServer(function (req, res) {
     }
 
     var perform_search = function (query, before) {
-	if (query == '!popular') {
-	    instagram.media.popular(respond);
-	}else if (query.charAt(0) == '#') {
-	    instagram.tags.search(query.replace('#', ''), function (tags, error) {
-		var options = {};
-		if (before != null) {
-		    options.min_id = before.split(':')[1];
-		}
-		var tag = query.replace('#', '');
-		if (tags.length > 0) {
-		   tag = tags[0].name;
-		}
-		instagram.tags.media(tag, options, function (images, error, pagination) {
-		    respond(images, error, {tags: tags, pagination: pagination});
-		});
-	    });
-	}else{
-	    var geocode = JSON.parse(query.replace('(', '[').replace(')', ']'));
-	    
-	    var options = {lat: geocode[0],
-			   lng: geocode[1],
-			   distance: 5000};
-	    if (before != null) {
-		options.max_timestamp = before.split(':')[0];
-	    }
-
-	    instagram.media.search(options, respond);
-	}
+	lib.search(query, before, respond);
     }
 
     if (req.method == 'GET') {
-	perform_search(query['search'], query['before']);
+	lib.search(query['search'], query['before'], respond);
     }else{
 	res.writeHead(200);
 	res.write('We like searches via GET');
