@@ -17,17 +17,24 @@ var poll = function (subscription) {
     
 }
 
-var rescore = function () {
-    redis.zrange('HV:subscriptions', 0, -1, function (err, subscriptions) {
-	var first = subscriptions.shift();
-	async.forEach(subscriptions, function (subscription, callback) {
-	    redis.zadd('HV:subscriptions', subscription.
-		       
-		      }, function (err) {
-		      });
-	});
+var rescore = function (callback) {
+    redis.zrange('HV:subscriptions', 0, -1, 'withscores', function (err, subscriptions) {
+        var first = {key: subscriptions.shift(),
+                     score: subscriptions.shift()};
+        var score, key;
+
+        for (var i=0; i<subscriptions.length;) {
+            key = subscriptions[i++];
+            score = subscriptions[i++];
+            redis.zadd('HV:subscriptions', score-1, key);
+        }
+
+        redis.zadd('HV:subscriptions', Math.ceil(subscriptions.length/2), first.key, function (err) {
+            callback();
+        });
     });
 }
+
 
 new cron.CronJob('0 * * * * *', function(){
     redis.zrange('HV:subscriptions', 0, 0, function (err, subscription) {
