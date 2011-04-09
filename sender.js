@@ -8,7 +8,7 @@ var twitter = require('twitter'),
 
 var twit = new twitter(require('./settings').twitter);
 
-//daemon.start();
+daemon.start();
 
 var notify = function (query, N) {
     redis.smembers('HV:subscription:'+query, function (err, subscribers) {
@@ -67,6 +67,4 @@ var do_cron = function () {
     });
 }
 
-do_cron();
-
-//new cron.CronJob('0 * * * * *', do_cron);
+new cron.CronJob('0 * * * * *', do_cron);
