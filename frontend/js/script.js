@@ -20,6 +20,8 @@ var pagination_data = {'timestamp': (new Date()).getTime(),
 		       'id': 0,
 		       'tag_index': 0};
 
+var actual_search = null;
+
 $(document).ready(function () {
     var query = getQuerystring('search', '');
     
@@ -34,6 +36,7 @@ $(document).ready(function () {
     if (query != '') {
 	mpmetrics.track('Search page');
 	$("#frontpageresult").css({display: 'none'});
+	$("a.subscribe").css({display: 'inline-block'});
 
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
@@ -62,8 +65,7 @@ $(document).ready(function () {
 	mpmetrics.track('Clicked image', {
 	    'position': $this.attr('id').split('-')[1]
 	}, function () {
-	alert("measured");	  
- window.location.href = '/pic/'+$this.attr('img_id');
+	    window.location.href = '/pic/'+$this.attr('img_id');
 	});
     });
     
@@ -121,10 +123,38 @@ $(document).ready(function () {
 	    window.location = url;
 	});
     });
+
+    $("a.subscribe").click(function (event) {
+	event.preventDefault();
+
+	var txt = 'Enter your twitter nick:<br /><form><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" /></form>';
+	
+	var subscribe = function (v,m,f){
+	    if(v != undefined) {
+		now.subscribe(f.nick, actual_search, getQuerystring('search', ''), function () {
+		    $.prompt('You will love it '+f.nick+'!', {prefix: 'jqismooth'});
+		});
+	    }
+	}
+
+	$.prompt(txt,{
+	    callback: subscribe,
+	    buttons: { Subscribe: 'Subscribe' },
+	    prefix: 'jqismooth',
+	    loaded: function () {
+		$('#jqismooth form').submit(function (event) {
+		    event.preventDefault();
+		    $('#jqismooth_state0_buttonSubscribe').click();
+		});
+	    }
+	});
+    });
 });
 
 function find_pics(query, before) {
     var do_search = function (query) {
+	actual_search = query;
+
 	var data = {search: query,
 		    orig_query: $("input[type='text']").val()};
 	

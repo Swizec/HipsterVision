@@ -70,3 +70,18 @@ var server = http.createServer(function (req, res) {
 
 var port = process.argv[2];
 server.listen(port, '127.0.0.1');
+
+var everyone = require('now').initialize(server, settings.now_opts);
+
+everyone.now.subscribe = function (user, query, label, callback) {
+    redis.sadd('HV:subscription:'+query, JSON.stringify({'user': user.replace('@', ''),
+							 'label': decodeURIComponent(label)}));
+    redis.zscore('HV:subscriptions', query, function (err, score) {
+	if (score === null) {
+	        redis.zcard('HV:subscriptions', function (err, cardinality) {
+		    redis.zadd('HV:subscriptions', cardinality, query);
+		});
+	}
+    });
+    callback();
+}
