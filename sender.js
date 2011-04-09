@@ -8,10 +8,6 @@ var twitter = require('twitter'),
 
 var twit = new twitter(require('./settings').twitter);
 
-//twit.post('/statuses/update.json', {status: "This is a test tweet"}, function (data) {
-//    console.log(data);
-//});
-
 //daemon.start();
 
 var notify = function (query, N) {
@@ -19,10 +15,10 @@ var notify = function (query, N) {
 	async.forEach(subscribers, function (subscriber, callback) {
 	    subscriber = JSON.parse(subscriber);
 	    twit.post('/statuses/update.json', 
-			{status: '@'+subscriber.user+' there\'s '+N+' shiny new images for '+subscriber.label+' http://hipstervision.org/?search='+subscriber.label},
-			function (data) {
-				callback();
-});
+		      {status: '@'+subscriber.user+' there\'s '+N+' shiny new images for '+subscriber.label+' http://hipstervision.org/?search='+encodeURIComponent(subscriber.label)+'&utm_source=notification'},
+		      function (data) {
+			  callback();
+		      });
 	}, function (err) {});
     });
 }
@@ -31,15 +27,13 @@ var poll = function (query) {
 	query = query[0];
     lib.search(query, null, function (images, error) {
 	redis.get('HV:subscription:oldtime:'+query, function (err, oldtime) {
-		console.log(oldtime, err);   
-	 async.filter(images, function (image, callback) {
+	    async.filter(images, function (image, callback) {
 		callback(image.created_time > oldtime);
 	    }, function (images) {
 		if (images.length > 0) {
-		    redis.set('HV:subscription:oldtime:'+query, images[0].created_time, function (err, bla) {});
-		    //notify(query, images.length);
+		    redis.set('HV:subscription:oldtime:'+query, images[0].created_time);
+		    notify(query, images.length);
 		}
-		notify(query, 5);
 	    });
 	    
 	});
