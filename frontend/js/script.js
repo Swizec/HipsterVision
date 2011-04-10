@@ -236,7 +236,7 @@ function display_images(images) {
 
 	pagination_data.timestamp = images[i].created_time;
 
-	var $image = $proto.clone().appendTo($target);
+	var $image = $proto.clone().removeClass('hidden');
 	
 	$image.find('a')
 	    .attr('class', 'image')
@@ -253,6 +253,8 @@ function display_images(images) {
 	$caption.find('strong').html(images[i].user.username);
 	$caption.find('time').attr('datetime', isodatetime(d));
 	$caption.append((images[i].caption != null) ? '<br/>'+images[i].caption.text : '');
+
+	$image.appendTo($target);
 
 	FB.XFBML.parse($image.find('label.likes')[0]);
 	make_twitter();
