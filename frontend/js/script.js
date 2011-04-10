@@ -236,11 +236,13 @@ function display_images(images) {
 
 	pagination_data.timestamp = images[i].created_time;
 
-	var $image = $proto.clone()
+	var $image = $proto.clone().appendTo($target);
+	
+	$image.find('a')
 	    .attr('class', 'image')
 	    .attr('id', 'image-'+(image_id+i))
 	    .attr('img_id', images[i].id)
-	    .appendTo($target);
+	    .attr('href', '/pic/'+images[i].id);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
