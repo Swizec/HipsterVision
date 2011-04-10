@@ -536,8 +536,9 @@ h2.last_search {
 
 a.subscribe {
     display: none;
-    background: url('/images/bird.png') left center;
-    padding-left: 32px;
+    background: url('/images/bird.png') left center no-repeat;
+    padding-left: 36px;
+    font-size: 1.2em;
 }
 
 .jqismoothfade{ position: absolute; background-color: #333333; }
