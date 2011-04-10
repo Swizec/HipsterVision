@@ -5,7 +5,7 @@ var twitter = require('twitter'),
     async = require('async'),
     lib = require('./lib.js'),
     settings = require('./settings.js'),
-    Bitly = require('bitly'),
+    Bitly = require('bitly').Bitly,
     daemon = require('daemon');
 
 var twit = new twitter(require('./settings').twitter);
@@ -19,6 +19,7 @@ var notify = function (query, N) {
 	    subscriber = JSON.parse(subscriber);
 	    var url = 'http://hipstervision.org/?search='+encodeURIComponent(subscriber.label)+'&utm_source=notification';
 	    bitly.shorten(url, function (url) {
+		url = url.data.url;
 		twit.post('/statuses/update.json', 
 			  {status: '@'+subscriber.user+' there\'s '+N+' shiny new images for '+subscriber.label+' '+url},
 			  function (data) {
