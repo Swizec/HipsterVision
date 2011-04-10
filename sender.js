@@ -31,6 +31,8 @@ var notify = function (query, N) {
 
 var poll = function (query) {
 	query = query[0];
+	// bug circumvention
+	if (query == 'undefined') return;
     lib.search(query, null, function (images, error) {
 	redis.get('HV:subscription:oldtime:'+query, function (err, oldtime) {
 	    async.filter(images, function (image, callback) {
@@ -73,4 +75,4 @@ var do_cron = function () {
     });
 }
 
-setInterval(do_cron, 3600); // once an hour
+setInterval(do_cron, 3600000); // once an hour
