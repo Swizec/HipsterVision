@@ -4,9 +4,12 @@ var twitter = require('twitter'),
     redis = require('redis').createClient(),
     async = require('async'),
     lib = require('./lib.js'),
+    settings = require('./settings.js'),
+    Bitly = require('bitly'),
     daemon = require('daemon');
 
 var twit = new twitter(require('./settings').twitter);
+var bitly = new Bitly(settings.bitly.name, settings.bitly.key);
 
 daemon.start();
 
@@ -14,11 +17,14 @@ var notify = function (query, N) {
     redis.smembers('HV:subscription:'+query, function (err, subscribers) {
 	async.forEach(subscribers, function (subscriber, callback) {
 	    subscriber = JSON.parse(subscriber);
-	    twit.post('/statuses/update.json', 
-		      {status: '@'+subscriber.user+' there\'s '+N+' shiny new images for '+subscriber.label+' http://hipstervision.org/?search='+encodeURIComponent(subscriber.label)+'&utm_source=notification'},
-		      function (data) {
-			  callback();
-		      });
+	    var url = 'http://hipstervision.org/?search='+encodeURIComponent(subscriber.label)+'&utm_source=notification';
+	    bitly.shorten(url, function (url) {
+		twit.post('/statuses/update.json', 
+			  {status: '@'+subscriber.user+' there\'s '+N+' shiny new images for '+subscriber.label+' '+url},
+			  function (data) {
+			      callback();
+			  });
+	    });
 	}, function (err) {});
     });
 }
