@@ -61,12 +61,14 @@
     <div class="front" id="main" role="main">
       <div class="shares">
 	<iframe
-    src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fhipstervision.org&amp;layout=box_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=65"
+    src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fhipstervision.org&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=65"
     scrolling="no" frameborder="0" style="border:none;
-    overflow:hidden; width:100px; height:65px;"
+    overflow:hidden; width:90px; height:20px;"
     allowTransparency="true"></iframe>
 
-      <a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="swizec">Tweet</a>
+      <a href="http://twitter.com/share" class="twitter-share-button"
+      data-count="horizontal" data-via="hipstervision">Tweet</a><br />
+	<a href="http://www.twitter.com/hipstervision"><img src="http://twitter-badges.s3.amazonaws.com/t_logo-a.png" alt="Follow HipsterVision on Twitter"/></a>
     </div>
 
       <header>
@@ -87,7 +89,7 @@
 	  class="twitter-share-button"
 	  data-url="http://hipstervision.org/pic/<%= special_image.id %>"
 	  data-text="Found a cool pic on hipstervision :D"
-	  data-count="none" data-via="swizec">Tweet</a>
+	  data-count="none" data-via="hipstervision">Tweet</a>
 		   <fb:like href="http://hipstervision.org/pic/<%= special_image.id %>"
 		      layout="button_count" show_faces="false" width="100"></fb:like>
 		 </label>
@@ -109,11 +111,12 @@
    	  <label>Find vintagey pics: </label>
 	  <% } %>
           <input type="text" name="search" placeholder="Enter a place, like San Francisco" />
-	  <p id="tips">Enter a location and find pretty pics about it (that hipsters took with instagram)!<br />To search for words use a hashbang, like <strong>#snow</strong></p>
+	  <p id="tips">Enter a location and find pretty pics about it (that hipsters took with instagram)!<br />To search for words use a hashbang, like <strong>#spring</strong></p>
           <input type="submit" value="Search ironically!" />
           <small class="tags"></small>
 	  <a href="http://hipstervision.org/?search=!popular" class="popular explain" style="">These pics were popular before anyone liked them ;)</a>
-       </form>
+	  <a href="#" class="subscribe">Subscribe to this search</a>
+	</form>
 
 	<% if (special_image) { %>
 	<div id="frontpageresult"  style="display: none">
@@ -123,17 +126,19 @@
 	  <h2 class="last_search">Last dude searched for <a href="/?search=<%= search_query_url %>" class="last_search_ref">
 	  <%= search_query %></a> and got these:</h2>
 	  <% for (var i=0; i<images.length; i++) : %>
-	     <div id="image-<%= i %>" 
-		  img_id="<%= images[i].id %>" class="image">
+	     <div id="image-<%= i %>" class="image">
 	       <div class="front">
-		 <img src="<%= images[i].images.low_resolution.url %>" />
+		 <a href="/pic/<%= images[i].id %>" 
+	 	    img_id="<%= images[i].id %>" class="image">
+		    <img src="<%= images[i].images.low_resolution.url %>" />
+		 </a>
 		 <label class="likes">
 		    ♥ <span class="num"><%= images[i].likes.count %></span>
 		    <a href="http://twitter.com/share"
 	  class="twitter-share-button"
 	  data-url="http://hipstervision.org/pic/<%= images[i].id %>"
 	  data-text="Found a cool pic on hipstervision :D"
-	  data-count="none" data-via="swizec">Tweet</a>
+	  data-count="none" data-via="hipstervision">Tweet</a>
 		   <fb:like href="http://hipstervision.org/pic/<%= images[i].id %>"
 		      layout="button_count" show_faces="false" width="100"></fb:like>
 		 </label>
@@ -156,7 +161,9 @@
 
         <div id="proto-image" class="image hidden">
 	  <div class="front">
-	    <img src="" />
+	    <a href="" class="image">
+	       <img src="" />
+	    </a>
 	    <label class="likes">
 	       ♥ <span class="num"></span>
 	    </label>
@@ -245,9 +252,10 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script src="/js/plugins.js?ver=2"></script>
+  <script src="/js/plugins.js?ver=3"></script>
   <script src="/js/jquery.timeago.js"></script>
-  <script src="/js/script.js?ver=2"></script>
+  <script src="/nowjs/now.js"></script>
+  <script src="/js/script.js?ver=3"></script>
   <script type='text/javascript'> var mp_protocol = (('https:' == document.location.protocol) ? 'https://' : 'http://'); document.write(unescape('%3Cscript src="' + mp_protocol + 'api.mixpanel.com/site_media/js/api/mixpanel.js" type="text/javascript"%3E%3C/script%3E')); </script> <script type='text/javascript'> try {  var mpmetrics = new MixpanelLib('fdab1c44fc9a6d367f146293680838e2'); } catch(err) { null_fn = function () {}; var mpmetrics = {  track: null_fn,  track_funnel: null_fn,  register: null_fn,  register_once: null_fn, register_funnel: null_fn }; } </script>
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <div id="fb-root"></div>

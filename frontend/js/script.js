@@ -20,6 +20,8 @@ var pagination_data = {'timestamp': (new Date()).getTime(),
 		       'id': 0,
 		       'tag_index': 0};
 
+var actual_search = null;
+
 $(document).ready(function () {
     var query = getQuerystring('search', '');
     
@@ -34,6 +36,7 @@ $(document).ready(function () {
     if (query != '') {
 	mpmetrics.track('Search page');
 	$("#frontpageresult").css({display: 'none'});
+	$("a.subscribe").css({display: 'inline-block'});
 
 	$("#search").addClass('small');
 	$("#more").css({display: 'block'})
@@ -46,20 +49,24 @@ $(document).ready(function () {
 
     $(".about").toggle(function () {
 	$("#container").addClass('flip');
-	$(".image").css({display: "none"});
+	$("div.image").css({display: "none"});
 
 	mpmetrics.track('Clicked about');
 
     }, function () {
 	$("#container").removeClass('flip');
-	$(".image").css({display: "inline-block"});
+	$("div.image").css({display: "inline-block"});
     });
 
-    $(".image").live('click', function () {
+    $("a.image").live('click', function (event) {
+	var $this = $(this);
+	event.preventDefault();
+
 	mpmetrics.track('Clicked image', {
-	    'position': $(this).attr('id').split('-')[1]
+	    'position': $this.attr('id').split('-')[1]
+	}, function () {
+	    window.location.href = '/pic/'+$this.attr('img_id');
 	});
-	window.location.href = '/pic/'+$(this).attr('img_id');
     });
     
     $('time').timeago();
@@ -116,10 +123,42 @@ $(document).ready(function () {
 	    window.location = url;
 	});
     });
+
+    $("a.subscribe").click(function (event) {
+	event.preventDefault();
+
+	mpmetrics.track("Clicked subscribe");
+
+	var txt = 'Enter your twitter nick:<br /><form><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" /></form>';
+	
+	var subscribe = function (v,m,f){
+	    mpmetrics.track("Subscribed");
+
+	    if(v != undefined) {
+		now.subscribe(f.nick, actual_search, getQuerystring('search', ''), function () {
+		    $.prompt('You will love it '+f.nick+'!', {prefix: 'jqismooth'});
+		});
+	    }
+	}
+
+	$.prompt(txt,{
+	    callback: subscribe,
+	    buttons: { Subscribe: 'Subscribe' },
+	    prefix: 'jqismooth',
+	    loaded: function () {
+		$('#jqismooth form').submit(function (event) {
+		    event.preventDefault();
+		    $('#jqismooth_state0_buttonSubscribe').click();
+		});
+	    }
+	});
+    });
 });
 
 function find_pics(query, before) {
     var do_search = function (query) {
+	actual_search = query;
+
 	var data = {search: query,
 		    orig_query: $("input[type='text']").val()};
 	
@@ -201,21 +240,25 @@ function display_images(images) {
 
 	pagination_data.timestamp = images[i].created_time;
 
-	var $image = $proto.clone()
+	var $image = $proto.clone().removeClass('hidden');
+	
+	$image.find('a')
 	    .attr('class', 'image')
 	    .attr('id', 'image-'+(image_id+i))
 	    .attr('img_id', images[i].id)
-	    .appendTo($target);
+	    .attr('href', '/pic/'+images[i].id);
 
 	$image.find('img').attr('src', images[i].images.low_resolution.url);
         $image.find('label.likes .num').html(images[i].likes.count);
-	$image.find('label.likes').append('<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hipstervision.org/pic/'+images[i].id+'" data-text="Found a cool pic on hipstervision :D" data-count="none" data-via="swizec">Tweet</a>');
+	$image.find('label.likes').append('<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hipstervision.org/pic/'+images[i].id+'" data-text="Found a cool pic on hipstervision :D" data-count="none" data-via="hipstervision">Tweet</a>');
 	$image.find('label.likes').append('<fb:like href="http://hipstervision.org/pic/'+images[i].id+'" class="fblike" layout="button_count" show_faces="false" width="100"></fb:like>');
 
 	var $caption = $image.find('label.caption');
 	$caption.find('strong').html(images[i].user.username);
 	$caption.find('time').attr('datetime', isodatetime(d));
 	$caption.append((images[i].caption != null) ? '<br/>'+images[i].caption.text : '');
+
+	$image.appendTo($target);
 
 	FB.XFBML.parse($image.find('label.likes')[0]);
 	make_twitter();
