@@ -1,6 +1,5 @@
 
 var twitter = require('twitter'),
-    cron = require('cron'),
     redis = require('redis').createClient(),
     async = require('async'),
     lib = require('./lib.js'),
@@ -74,4 +73,4 @@ var do_cron = function () {
     });
 }
 
-new cron.CronJob('0 * * * * *', do_cron);
+setInterval(do_cron, 3600); // once an hour
