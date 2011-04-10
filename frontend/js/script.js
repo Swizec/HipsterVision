@@ -127,9 +127,13 @@ $(document).ready(function () {
     $("a.subscribe").click(function (event) {
 	event.preventDefault();
 
+	mpmetrics.track("Clicked subscribe");
+
 	var txt = 'Enter your twitter nick:<br /><form><input type="text" id="nick" name="nick" placeholder="for example @hipstervision" /></form>';
 	
 	var subscribe = function (v,m,f){
+	    mpmetrics.track("Subscribed");
+
 	    if(v != undefined) {
 		now.subscribe(f.nick, actual_search, getQuerystring('search', ''), function () {
 		    $.prompt('You will love it '+f.nick+'!', {prefix: 'jqismooth'});
